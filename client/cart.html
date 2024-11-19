@@ -1,0 +1,92 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SSH - Your Cart</title>
+    <link rel="stylesheet" href="css/framework.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="icon" href="assets/ssh-logo.png" type="image/png" sizes="32x32">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <button class="layer2container navigationButton buttonText" id="backToShoppingButton">
+        <span class="navigationIcon leftIcon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
+        </span>
+        Back to Shopping
+    </button>
+    <script src="js/cart.js"></script>
+    <section id="cartHero">
+        <div id="shopLogoBackground" class="layer1container">
+            <div id="shopLogo"></div>
+        </div>
+        <h2 id="cartTitle">Shopping Cart</h2>
+    </section>
+    <section id="personalCarts">
+        <div class="personalCart layer1container">
+            <div class="personalCartSummary">
+                <span class="dropdownIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-360 280-560h400L480-360Z"/></svg>
+                </span>
+                <h3 class="cartPersonName">John Davis</h3>
+                <h4 class="cartPersonTotal">£7.70</h4>
+                <button class="cartConfirmButton">
+                    Confirm
+                </button>
+            </div>
+            <div class="personalCartDropdown">
+                <div class="cartItems">
+                    <div class="itemContainer layer2container">
+                        <div class="layer3container">
+                            <div class="itemImage"></div>
+                            <div class="itemMeta">
+                                <h4 class="itemName">Lorem ipsum lorem ipsum lorem ipsum</h4>
+                                <p class="itemDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                            </div>
+                            <span class="itemPrice itemPriceText">£1.79</span>
+                            <input type="number" id="itemQuantity" name="quantity" min="1" max="99">
+                            <input type="submit" class="removeButton" value="Remove">
+                        </div>
+                    </div>
+                </div>
+                <div class="personalCartCheckout">
+                    <div class="personalCartTotal">
+                        <span class="personalCartTotalName">Cart Total:</span>
+                        <span class="personalCartTotalResult"></span>
+                    </div>
+                    <div class="personalDeliveryFee">
+                        <span class="personalDeliveryFeeName">Delivery Fee Split</span>
+                        <span class="personalDeliveryFeeResult"></span>
+                    </div>
+                    <hr class="personalDivider">
+                    <div class="personalTotal">
+                        <span class="personalTotalName">Your Total</span>
+                        <span class="personalTotalResult"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="checkout">
+        <hr id="checkoutDivider">
+        <div>
+            <div id="cartTotal">
+                <h4 id="cartTotalName">
+                    Cart Total:
+                </h4>
+                <h4 id="cartTotalResult">£1.00</h4>
+            </div>
+            <div id="deliveryFeeTotal">
+                <h4 id="deliveryFeeTotalName">
+                    Delivery Fee:
+                </h4>
+                <h4 id="deliveryFeeTotalResult">£5.99</h4>
+            </div>
+            <div id="totalPrice">
+                <h3 id="totalPriceTotal">Total</h3>
+                <h3 id="totalPriceResult">£6.99</h3>
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>

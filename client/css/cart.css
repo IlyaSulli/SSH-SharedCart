@@ -1,0 +1,36 @@
+#backToShoppingButton{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#cartHero{
+    display: flex;
+    justify-content: center;
+    margin-top: 5dvh;
+}
+
+#shopLogoBackground{
+    display: flex;
+    width: 150px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    /* Test Data to be changed with js */
+    background-color: #0958A2;
+    margin-right: 40px;
+}
+
+#shopLogo{
+    display: inline;
+    width: 90px;
+    height: 80px;
+    object-fit: fill;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* Test Data to be changed with js */
+    background-image:url("../assets/shopLogos/Tesco-logo.png");
+}
+
+
+

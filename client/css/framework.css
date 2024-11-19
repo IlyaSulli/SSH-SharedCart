@@ -15,43 +15,52 @@
     --layer3color: #ECF4FE;
 }
 
+@font-face{
+    font-family: Inter;
+    src: url("../assets/fonts/Inter-Variable.ttf");
+}
+
+body{
+    background-color: var(--background);
+}
+
 h2{
     color: var(--defaultdarktextcolor);
-    font-family: Inter, serif;
+    font-family: Inter,Tahoma, serif;
     font-weight: 600;
     font-size: 24px;
 }
 
 h3{
     color: var(--defaultdarktextcolor);
-    font-family: Inter, serif;
+    font-family: Inter,Tahoma, serif;
     font-weight: bold;
     font-size: 20px;
 }
 
 h4{
     color: var(--defaultdarktextcolor);
-    font-family: Inter, serif;
+    font-family: Inter,Tahoma, serif;
     font-weight: bold;
     font-size: 16px;
 }
 
 p{
     color: var(--defaultdarktextcolor);
-    font-family: Inter, serif;
+    font-family: Inter,Tahoma, serif;
     font-weight: normal;
     font-size: 12px;
 }
 
 .itemPriceText{
     color: var(--defaultdarktextcolor);
-    font-family: Inter, serif;
+    font-family: Inter,Tahoma, serif;
     font-weight: 500;
     font-size: 20px;
 }
 
 .buttonText{
-    font-family: Inter, serif;
+    font-family: Inter,Tahoma, serif;
     font-weight: 500;
     font-size: 14px;
 }
@@ -77,4 +86,26 @@ p{
 .layer3container{
     border-radius: 3px;
     background-color: var(--layer3color);
+}
+
+.navigationButton{
+    padding: 10px 15px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    color: var(--defaultdarktextcolor);
+}
+
+.navigationButton:hover.layer2container{
+    background-color: var(--layer1color);
+}
+
+.navigationIcon>svg{
+    fill: var(--defaultdarktextcolor);
+}
+
+.leftIcon{
+    margin-right: 10px;
 }
