@@ -1,0 +1,80 @@
+:root{
+    --background: #ECF4FE;
+    --primary: #0D78CF;
+    --error: #AF0F0F;
+    --notify: #DA0000;
+    --selection: #ECF4FE;
+    /*Text*/
+    --defaultdarktextcolor: #1C1D1D;
+    --defaultlighttextcolor: #E1EFF6;
+    --disabledtextcolor: #848484;
+    /*Layers*/
+    --layer0color: #ECF4FE;
+    --layer1color: #BFD2E9;
+    --layer2color: #D8E9FD;
+    --layer3color: #ECF4FE;
+}
+
+h2{
+    color: var(--defaultdarktextcolor);
+    font-family: Inter, serif;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+h3{
+    color: var(--defaultdarktextcolor);
+    font-family: Inter, serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+h4{
+    color: var(--defaultdarktextcolor);
+    font-family: Inter, serif;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+p{
+    color: var(--defaultdarktextcolor);
+    font-family: Inter, serif;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.itemPriceText{
+    color: var(--defaultdarktextcolor);
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.buttonText{
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.primaryButtonText{
+    color: var(--defaultlighttextcolor);
+}
+
+.errorButtonText{
+    color: var(--error);
+}
+
+.layer1container{
+    border-radius: 10px;
+    background-color: var(--layer1color);
+}
+
+.layer2container{
+    border-radius: 5px;
+    background-color: var(--layer2color);
+}
+
+.layer3container{
+    border-radius: 3px;
+    background-color: var(--layer3color);
+}
