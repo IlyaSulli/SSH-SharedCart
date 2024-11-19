@@ -3,11 +3,11 @@
 **NOTE**: This project was an assigned university task set by The University of Birmingham to test our ability to work as a team to complete a project. This project tested our skills to design an Engineering Design Review, build the project designed and to reflect on our piers to see what they did well and ways that they could have improved. 
 
 **Languages Used**:
-  Frontend:
+- Frontend:
   - HTML
   - CSS
   - JS
-  Backend:
+- Backend:
   - Java
   - SQL
 
