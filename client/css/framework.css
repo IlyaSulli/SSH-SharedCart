@@ -1,7 +1,9 @@
 :root{
     --background: #ECF4FE;
     --primary: #0D78CF;
+    --primaryhover: #095a9c;
     --error: #AF0F0F;
+    --errorhover: #8C0D0D;
     --notify: #DA0000;
     --selection: #ECF4FE;
     /*Text*/
@@ -13,6 +15,31 @@
     --layer1color: #BFD2E9;
     --layer2color: #D8E9FD;
     --layer3color: #ECF4FE;
+    /* Counter */
+    --counterbackground: #010A13;
+    /*Font*/
+    --fontGeneric: Inter;
+}
+
+[data-theme="dark"] {
+    --background: #1A1A1A;
+    --primary: #4A90E2;
+    --primaryhover: #367ABD;
+    --error: #FF5A5A;
+    --errorhover: #CC4A4A;
+    --notify: #FF4444;
+    --selection: #2A2A2A;
+
+    --defaultdarktextcolor: #EDEDED;
+    --defaultlighttextcolor: #1A1A1A;
+    --disabledtextcolor: #757575;
+
+    --layer0color: #1A1A1A;
+    --layer1color: #333333;
+    --layer2color: #444444;
+    --layer3color: #555555;
+
+    --counterbackground: #0A141F;
 }
 
 @font-face{
@@ -22,45 +49,50 @@
 
 body{
     background-color: var(--background);
+    transition: background-color 0.3s ease;
 }
 
 h2{
     color: var(--defaultdarktextcolor);
-    font-family: Inter,Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, serif;
     font-weight: 600;
     font-size: 24px;
 }
 
 h3{
     color: var(--defaultdarktextcolor);
-    font-family: Inter,Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, serif;
     font-weight: bold;
     font-size: 20px;
 }
 
 h4{
     color: var(--defaultdarktextcolor);
-    font-family: Inter,Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, serif;
     font-weight: bold;
     font-size: 16px;
 }
 
 p{
     color: var(--defaultdarktextcolor);
-    font-family: Inter,Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, serif;
     font-weight: normal;
     font-size: 12px;
 }
 
+span{
+    font-family: var(--fontGeneric),Tahoma, serif;
+}
+
 .itemPriceText{
     color: var(--defaultdarktextcolor);
-    font-family: Inter,Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, serif;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .buttonText{
-    font-family: Inter,Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, serif;
     font-weight: 500;
     font-size: 14px;
 }
@@ -108,4 +140,99 @@ p{
 
 .leftIcon{
     margin-right: 10px;
+}
+
+#themeToggle{
+    display: flex;
+    margin: 5px;
+    padding: 10px;
+    background: var(--layer1color);
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+#themeToggle>svg{
+    fill: var(--defaultdarktextcolor);
+}
+
+header{
+    display: flex;
+    align-items: center;
+    align-self: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+label{
+    font-size: 0;
+}
+
+/* Cart Items */
+
+.itemContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 0 7px 10px;
+    min-height: 90px;
+}
+
+.itemImageContainer{
+    min-width: 80px;
+    min-height: 80px;
+    margin-right: 20px;
+}
+
+.itemMeta{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.itemName{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    margin: 0;
+}
+
+.itemDescription{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    margin-top: 10px;
+}
+
+.itemPrice{
+    margin-left: 20px;
+    margin-right: 10px;
+
+}
+
+.itemQuantity{
+    height: 40px;
+    border: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    font-size: 14px;
+    width: 55px;
+    font-family: var(--fontGeneric), Tahoma, serif;
+    color: var(--defaultdarktextcolor);
+}
+
+.itemList{
+    display: grid;
+    margin: 0 20px;
+    row-gap: 10px;
 }

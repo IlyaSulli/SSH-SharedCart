@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>SSH - Your Cart</title>
@@ -8,13 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <button class="layer2container navigationButton buttonText" id="backToShoppingButton">
-        <span class="navigationIcon leftIcon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
-        </span>
-        Back to Shopping
-    </button>
-    <script src="js/cart.js"></script>
+    <header>
+        <button class="layer2container navigationButton buttonText" id="backToShoppingButton">
+            <span class="navigationIcon leftIcon">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
+            </span>
+            Back to Shopping
+        </button>
+        <div id="themeToggle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M396-396q-32-32-58.5-67T289-537q-5 14-6.5 28.5T281-480q0 83 58 141t141 58q14 0 28.5-2t28.5-6q-39-22-74-48.5T396-396Zm57-56q51 51 114 87.5T702-308q-40 51-98 79.5T481-200q-117 0-198.5-81.5T201-480q0-65 28.5-123t79.5-98q20 72 56.5 135T453-452Zm290 72q-20-5-39.5-11T665-405q8-18 11.5-36.5T680-480q0-83-58.5-141.5T480-680q-20 0-38.5 3.5T405-665q-8-19-13.5-38T381-742q24-9 49-13.5t51-4.5q117 0 198.5 81.5T761-480q0 26-4.5 51T743-380ZM440-840v-120h80v120h-80Zm0 840v-120h80V0h-80Zm323-706-57-57 85-84 57 56-85 85ZM169-113l-57-56 85-85 57 57-85 84Zm671-327v-80h120v80H840ZM0-440v-80h120v80H0Zm791 328-85-85 57-57 84 85-56 57ZM197-706l-84-85 56-57 85 85-57 57Zm199 310Z"/></svg>
+        </div>
+    </header>
     <section id="cartHero">
         <div id="shopLogoBackground" class="layer1container">
             <div id="shopLogo"></div>
@@ -29,38 +33,109 @@
                 </span>
                 <h3 class="cartPersonName">John Davis</h3>
                 <h4 class="cartPersonTotal">£7.70</h4>
-                <button class="cartConfirmButton">
+                <button class="cartConfirmButton layer2container buttonText">
                     Confirm
                 </button>
             </div>
             <div class="personalCartDropdown">
-                <div class="cartItems">
+                <div class="itemList">
                     <div class="itemContainer layer2container">
-                        <div class="layer3container">
+                        <div class="itemImageContainer layer3container">
                             <div class="itemImage"></div>
-                            <div class="itemMeta">
-                                <h4 class="itemName">Lorem ipsum lorem ipsum lorem ipsum</h4>
-                                <p class="itemDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-                            </div>
-                            <span class="itemPrice itemPriceText">£1.79</span>
-                            <input type="number" id="itemQuantity" name="quantity" min="1" max="99">
-                            <input type="submit" class="removeButton" value="Remove">
+                        </div>
+                        <div class="itemMeta">
+                            <h4 class="itemName">Lorem ipsum lorem ipsum lorem ipsum</h4>
+                            <p class="itemDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                        </div>
+                        <span class="itemPrice itemPriceText">£1.79</span>
+                        <label>Quantity: <input type="number" class="itemQuantity layer3container" name="quantity" min="1" max="99"></label>
+                        <input type="submit" class="removeButton buttonText layer3container" value="Remove">
+                    </div>
+                    <div class="itemContainer layer2container">
+                        <div class="itemImageContainer layer3container">
+                            <div class="itemImage"></div>
+                        </div>
+                        <div class="itemMeta">
+                            <h4 class="itemName">Lorem ipsum lorem ipsum lorem ipsum</h4>
+                            <p class="itemDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                        </div>
+                        <span class="itemPrice itemPriceText">£1.79</span>
+                        <label>Quantity: <input type="number" class="itemQuantity layer3container" name="quantity" min="1" max="99"></label>
+                        <input type="submit" class="removeButton buttonText layer3container" value="Remove">
+                    </div>
+                </div>
+                <div class="personalCartCheckoutWrapper">
+                    <div class="personalCartCheckout">
+                        <div class="personalCartTotal personalCartTotalItem">
+                            <span class="personalCartTotalName">Cart Total</span>
+                            <span class="personalCartTotalResult">£4.99</span>
+                        </div>
+                        <div class="personalDeliveryFee personalCartTotalItem">
+                            <span class="personalDeliveryFeeName">Delivery Fee Split</span>
+                            <span class="personalDeliveryFeeResult">£2.00</span>
+                        </div>
+                        <hr class="personalDivider ">
+                        <div class="personalTotal personalCartTotalItem">
+                            <span class="personalTotalName">Your Total</span>
+                            <span class="personalTotalResult">£6.99</span>
                         </div>
                     </div>
                 </div>
-                <div class="personalCartCheckout">
-                    <div class="personalCartTotal">
-                        <span class="personalCartTotalName">Cart Total:</span>
-                        <span class="personalCartTotalResult"></span>
+            </div>
+        </div>
+        <div class="personalCart layer1container">
+            <div class="personalCartSummary">
+                <span class="dropdownIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-360 280-560h400L480-360Z"/></svg>
+                </span>
+                <h3 class="cartPersonName">John Davis</h3>
+                <h4 class="cartPersonTotal">£7.70</h4>
+                <button class="cartConfirmButton layer2container buttonText">
+                    Confirm
+                </button>
+            </div>
+            <div class="personalCartDropdown">
+                <div class="itemList">
+                    <div class="itemContainer layer2container">
+                        <div class="itemImageContainer layer3container">
+                            <div class="itemImage"></div>
+                        </div>
+                        <div class="itemMeta">
+                            <h4 class="itemName">Lorem ipsum lorem ipsum lorem ipsum</h4>
+                            <p class="itemDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                        </div>
+                        <span class="itemPrice itemPriceText">£1.79</span>
+                        <label>Quantity: <input type="number" class="itemQuantity layer3container" name="quantity" min="1" max="99"></label>
+                        <input type="submit" class="removeButton buttonText layer3container" value="Remove">
                     </div>
-                    <div class="personalDeliveryFee">
-                        <span class="personalDeliveryFeeName">Delivery Fee Split</span>
-                        <span class="personalDeliveryFeeResult"></span>
+                    <div class="itemContainer layer2container">
+                        <div class="itemImageContainer layer3container">
+                            <div class="itemImage"></div>
+                        </div>
+                        <div class="itemMeta">
+                            <h4 class="itemName">Lorem ipsum lorem ipsum lorem ipsum</h4>
+                            <p class="itemDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                        </div>
+                        <span class="itemPrice itemPriceText">£1.79</span>
+                        <label>Quantity: <input type="number" class="itemQuantity layer3container" name="quantity" min="1" max="99"></label>
+                        <input type="submit" class="removeButton buttonText layer3container" value="Remove">
                     </div>
-                    <hr class="personalDivider">
-                    <div class="personalTotal">
-                        <span class="personalTotalName">Your Total</span>
-                        <span class="personalTotalResult"></span>
+                </div>
+                <div class="personalCartCheckoutWrapper">
+                    <div class="personalCartCheckout">
+                        <div class="personalCartTotal personalCartTotalItem">
+                            <span class="personalCartTotalName">Cart Total</span>
+                            <span class="personalCartTotalResult">£4.99</span>
+                        </div>
+                        <div class="personalDeliveryFee personalCartTotalItem">
+                            <span class="personalDeliveryFeeName">Delivery Fee Split</span>
+                            <span class="personalDeliveryFeeResult">£2.00</span>
+                        </div>
+                        <hr class="personalDivider ">
+                        <div class="personalTotal personalCartTotalItem">
+                            <span class="personalTotalName">Your Total</span>
+                            <span class="personalTotalResult">£6.99</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,25 +143,29 @@
     </section>
     <section id="checkout">
         <hr id="checkoutDivider">
-        <div>
-            <div id="cartTotal">
-                <h4 id="cartTotalName">
-                    Cart Total:
-                </h4>
-                <h4 id="cartTotalResult">£1.00</h4>
-            </div>
-            <div id="deliveryFeeTotal">
-                <h4 id="deliveryFeeTotalName">
-                    Delivery Fee:
-                </h4>
-                <h4 id="deliveryFeeTotalResult">£5.99</h4>
-            </div>
-            <div id="totalPrice">
-                <h3 id="totalPriceTotal">Total</h3>
-                <h3 id="totalPriceResult">£6.99</h3>
+        <div id="checkoutWrapper">
+            <div id="checkoutSide">
+                <div id="cartTotal" class="checkoutItem">
+                    <h4 id="cartTotalName">
+                        Cart Total:
+                    </h4>
+                    <h4 id="cartTotalResult">£1.00</h4>
+                </div>
+                <div id="deliveryFeeTotal" class="checkoutItem">
+                    <h4 id="deliveryFeeTotalName">
+                        Delivery Fee:
+                    </h4>
+                    <h4 id="deliveryFeeTotalResult">£5.99</h4>
+                </div>
+                <div id="totalPrice" class="checkoutItem">
+                    <h3 id="totalPriceTotal">Total</h3>
+                    <h3 id="totalPriceResult">£6.99</h3>
+                </div>
             </div>
         </div>
 
     </section>
+    <script src="js/cart.js"></script>
+    <script src="js/framework.js">  </script>
 </body>
 </html>
