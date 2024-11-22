@@ -12,7 +12,6 @@ svg {
 
 #userId {
 	font-size: 18px;
-	/* margin-right: 10px; */
 }
 
 #userId > svg {
@@ -20,8 +19,8 @@ svg {
 }
 
 #cart {
-	/* margin-right: 20px; */
 	position: relative;
+	margin-right: 30px;
 }
 
 #cartCount {
@@ -49,14 +48,14 @@ svg {
 }
 
 .searchBarHero svg {
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 }
 
 #shopLogoBackground {
 	display: flex;
-	width: 150px;
-	height: 65px;
+	width: 130px;
+	height: 50px;
 	align-items: center;
 	justify-content: center;
 	border-radius: 6px 0px 0px 6px;
@@ -67,8 +66,8 @@ svg {
 
 #shopLogo {
 	display: inline;
-	width: 90px;
-	height: 80px;
+	width: 65 px;
+	height: 50px;
 	object-fit: fill;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -79,12 +78,11 @@ svg {
 
 .searchBar {
 	width: 100%;
-	/* width: 800px; */
 	background: none;
 	border: none;
+	color: var(--defaultdarktextcolor);
 	font-family: var(--fontGeneric), Tahoma, serif;
-	font-size: 28px;
-	/* border-radius: 6px; */
+	font-size: 22px;
 }
 
 .searchBar:focus {
