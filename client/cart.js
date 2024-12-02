@@ -19,17 +19,17 @@ async function updateQuantity(personId ,itemId, quantityItem) {
            Quantity: quantityItem, // Set new quantity
         },
      };
-    const item = await items.updateOne(queryTemp, updateDocument); // Update the matching document
-    const jsonItem = JSON.stringify(item, null, "\t"); // Turn this into a JSON string
+    const item = await items.updateOne(queryTemp, updateDocument); // Update the matching document in the database
+    const jsonItem = JSON.stringify(item, null, "\t");
     fs.writeFileSync(`${__dirname}/response.json`, jsonItem, `utf-8`); // Write this info to a JSON file
 }
 
 // Deletes specific item from peopleItem database
 async function deleteItem(personId ,itemId) {
     const items = database.collection('peopleItems'); // Stores pointer to peopleItems collection
-    const queryTemp = {"ItemId" : itemId, "PersonId" : personId}; // Searches for ItemId and PersonId are equal to inputs
-    const item = await items.deleteOne(queryTemp); // Deletes matching document item
-    const jsonItem = JSON.stringify(item, null, "\t"); // Turns this output into a string
+    const queryTemp = {"ItemId" : itemId, "PersonId" : personId};
+    const item = await items.deleteOne(queryTemp);
+    const jsonItem = JSON.stringify(item, null, "\t");
       fs.writeFileSync(`${__dirname}/response.json`, jsonItem, `utf-8`); // Write this info to a JSON file
 }
 
@@ -37,8 +37,8 @@ async function deleteItem(personId ,itemId) {
 async function updateStatus(personId) {
     const people = database.collection('people'); // Connects to people collection
     const queryTemp = {_id : new ObjectId(personId)}; // Searches for whether the personId is equal to the input
-    var person = await people.findOne(queryTemp); // Finds specific person with this personId
-    if (person.Confirmed === true) { // Checks whether they have confirmed or not
+    var person = await people.findOne(queryTemp);
+    if (person.Confirmed === true) {
         const updateDocument = {
             $set: {
                Confirmed: false, // If True -> False
@@ -63,27 +63,24 @@ async function getListOfItems() {
     var queryTemp = {}; // No Query as this is finding all people
     const people = await collection.find(queryTemp).toArray(); // Stores an array of every person in the database
 
-    var tempItem = []; // Initialises the JSON file input
+    var tempItem = []; // Initialises the JSON file input array
     for (var i = 0; i < people.length; i++) { // Runs through every person in the database
         collection = database.collection('peopleItems'); // Connects to peopleItems Collection
-        var cart = []; // Initialises Cart which will store all this persons Items
-        queryTemp = {"PersonId" : people[i]._id.toString()}; // Sets Query to check for whether the PersonId is equal to current searching person in peopleItems Collection
+        queryTemp = {"PersonId" : people[i]._id.toString()};
         const itemIds = await collection.find(queryTemp).toArray(); // Stores Array of all items that are associated with this person
-        collection = database.collection('items'); // Connects to items collection
-        var tempListItems = []; // Initialises array to store the relevant info for items
+        collection = database.collection('items');
+        var cart = []; // Initialises array to store the relevant info for items
         for (var j = 0; j < itemIds.length; j++) { // Runs through every item for this person
             queryTemp = {_id : new ObjectId(itemIds[j].ItemId)}; // Finds items which have corresponding ids from item Collection
             const item = await collection.find(queryTemp).toArray(); // Stores all info about that item
-            console.log(item);
-            tempListItems.push(item[0]); // Adds item to list of current items for this person
+            cart.push(item[0]);
         }
-        if (tempListItems.length != 0) { // Checks whether person has items -> Otherwise ignores them from JSON file
-        cart = tempListItems; // Push all current items to the cart array
+        if (cart.length != 0) { // Checks whether person has items -> Otherwise ignores them from JSON file
         const id = people[i]._id.toString();
         tempItem.push({[id] : {"name": people[i].FirstName +" " + people[i].Surname, "confirmed" : people[i].Confirmed,"cart" : cart}}); // Pushes all relevant info into tempItem array
         }
     }
-    const jsonItem = JSON.stringify(tempItem, null, "\t"); // Converts array into a string
+    const jsonItem = JSON.stringify(tempItem, null, "\t");
     fs.writeFileSync(`${__dirname}/response.json`, jsonItem); // Writes this all into a JSON file
 }
 
@@ -92,8 +89,8 @@ async function getListOfItems() {
 const server = http.createServer((request,response) => {
     const {search, pathname} = url.parse(request.url, true); // Gets relevant URL info
 
-    if (pathname === `/` || pathname === `/api`) { // Checks whether the Url has a relevant path within it
-        if (search === `?updateQuantity`) { // Checks whether the query after /api is a certain value
+    if (pathname === `/` || pathname === `/api`) {
+        if (search === `?updateQuantity`) {
             updateQuantity("6748975f6414acd158893bfb","674898306414acd158893c01", 10).catch(console.dir);
             response.end("Updating Quantity");
         } else if (search === `?removeitem`) {
@@ -101,7 +98,6 @@ const server = http.createServer((request,response) => {
             deleteItem("6748975f6414acd158893bfb", "674898306414acd158893c01").catch(console.dir);
             response.end("Removing Item");
         } else if (search === `?toggleConfirm`) {
-           // Send additional info if everyone has confirmed
             updateStatus("6749ae96930928d87b893bf9");
             response.end("Updated Status");
         } else if (search === `?getListOfItems`) {
