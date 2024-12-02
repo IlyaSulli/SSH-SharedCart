@@ -74,10 +74,11 @@ async function getListOfItems() {
         for (var j = 0; j < itemIds.length; j++) { // Runs through every item for this person
             queryTemp = {_id : new ObjectId(itemIds[j].ItemId)}; // Finds items which have corresponding ids from item Collection
             const item = await collection.find(queryTemp).toArray(); // Stores all info about that item
-            tempListItems.push(item); // Adds item to list of current items for this person
+            console.log(item);
+            tempListItems.push(item[0]); // Adds item to list of current items for this person
         }
         if (tempListItems.length != 0) { // Checks whether person has items -> Otherwise ignores them from JSON file
-        cart.push(tempListItems); // Push all current items to the cart array
+        cart = tempListItems; // Push all current items to the cart array
         const id = people[i]._id.toString();
         tempItem.push({[id] : {"name": people[i].FirstName +" " + people[i].Surname, "confirmed" : people[i].Confirmed,"cart" : cart}}); // Pushes all relevant info into tempItem array
         }
