@@ -77,7 +77,7 @@ async function getListOfItems() {
         }
         if (cart.length != 0) { // Checks whether person has items -> Otherwise ignores them from JSON file
         const id = people[i]._id.toString();
-        tempItem.push({[id] : {"name": people[i].FirstName +" " + people[i].Surname, "confirmed" : people[i].Confirmed,"cart" : cart}}); // Pushes all relevant info into tempItem array
+        tempItem.push({"userid" : id, "firstname": people[i].FirstName, "lastname" : people[i].Surname, "confirmed" : people[i].Confirmed,"cart" : cart}); // Pushes all relevant info into tempItem array
         }
     }
     const jsonItem = JSON.stringify(tempItem, null, "\t");
