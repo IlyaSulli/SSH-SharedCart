@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const itemPeopleSchema = new mongoose.Schema({
+const peopleItemSchema = new mongoose.Schema({
    PersonId: {
       type: String,
       required: true,
@@ -15,6 +15,6 @@ const itemPeopleSchema = new mongoose.Schema({
    },
 });
 
-const ItemPerson = mongoose.model('ItemPerson', itemPeopleSchema);
+const PersonItem = mongoose.model('peopleItems', peopleItemSchema);
 
-module.exports = ItemPerson;
+module.exports = PersonItem;

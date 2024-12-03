@@ -13,6 +13,9 @@ const peopleSchema = new mongoose.Schema({
       type: Boolean,
       required: true,
    },
+   Cart: {
+      type: String,
+   },
 });
 
 const Person = mongoose.model('Person', peopleSchema);

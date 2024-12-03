@@ -1,9 +1,6 @@
 const Item = require('./../models/itemModel');
 const Shop = require('./../models/shopModel');
 const APIFeatures = require('./../APIFeatures');
-const { QueryCursor } = require('mongoose');
-const { threadId } = require('worker_threads');
-const { start } = require('repl');
 
 exports.getShops = async (req, res) => {
    try {

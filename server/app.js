@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const { error } = require('console');
 
 const searchRouter = require('./routes/searchRoutes');
+const cartRouter = require('./routes/cartRoutes');
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use((req, res, next) => {
    next();
 });
 
-app.use('/', searchRouter);
+app.use('/search', searchRouter);
+
+app.use('/cart', cartRouter);
 
 module.exports = app;
