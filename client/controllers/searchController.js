@@ -28,16 +28,16 @@ exports.getShops = async (req, res) => {
 
 exports.getShopItems = async (req, res) => {
    try {
-      const itemQuery = Item.aggregate([
-         {
-            $match: { ShopID: req.params.shopid },
-         },
-         {
-            $sort: { ItemName: 1 },
-         },
-      ]);
+      if (!req.query.searchTerm) {
+         req.query.searchTerm = '';
+      }
 
-      const features = new APIFeatures(itemQuery, req.query).paginate();
+      const itemQuery = Item.find({
+         ShopID: req.params.shopid,
+         ItemName: { $regex: req.query.searchTerm, $options: 'i' },
+      });
+
+      const features = new APIFeatures(itemQuery, req.query).sort().paginate();
 
       const items = await features.query;
 

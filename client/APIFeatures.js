@@ -4,6 +4,11 @@ class APIFeatures {
       this.queryString = queryString;
    }
 
+   sort() {
+      this.query.sort('ItemName');
+      return this;
+   }
+
    paginate() {
       const thePage = parseInt(this.queryString.page, 10) || 1;
       const theLimit = parseInt(this.queryString.limit, 10) || 100;
