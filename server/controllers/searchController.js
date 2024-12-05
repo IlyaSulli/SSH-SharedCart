@@ -1,5 +1,6 @@
 const Item = require('../models/itemModel');
 const Shop = require('../models/shopModel');
+const PersonItem = require('../models/peopleItemModel');
 const APIFeatures = require('../APIFeatures');
 
 exports.getShops = async (req, res) => {
@@ -48,6 +49,46 @@ exports.getShopItems = async (req, res) => {
             items,
          },
       });
+   } catch (err) {
+      console.log(err);
+      res.status(404).json({
+         status: 'fail',
+         message: err,
+      });
+   }
+};
+
+exports.addToCart = async (req, res) => {
+   try {
+      const exist = await PersonItem.find({
+         PersonId: req.body.PersonId,
+         ItemId: req.body.ItemId,
+      });
+      if (exist.length == 0) {
+         const cartAdd = await PersonItem.create(req.body);
+         res.status(201).json({
+            status: 'success',
+            data: {
+               addition: cartAdd,
+            },
+         });
+      } else {
+         const newQuant = exist[0].Quantity + req.body.Quantity;
+         const updateCart = await PersonItem.findByIdAndUpdate(
+            exist[0].id,
+            { Quantity: newQuant },
+            {
+               new: true,
+               runValidators: true,
+            }
+         );
+         res.status(200).json({
+            status: 'success',
+            data: {
+               update: updateCart,
+            },
+         });
+      }
    } catch (err) {
       console.log(err);
       res.status(404).json({

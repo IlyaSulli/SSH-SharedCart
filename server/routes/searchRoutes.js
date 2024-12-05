@@ -5,6 +5,9 @@ const router = express.Router();
 
 router.route('/').get(searchController.getShops);
 
-router.route('/:shopid').get(searchController.getShopItems);
+router
+   .route('/:shopid')
+   .get(searchController.getShopItems)
+   .post(searchController.addToCart);
 
 module.exports = router;
