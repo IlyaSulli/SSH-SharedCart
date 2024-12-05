@@ -33,7 +33,7 @@ const search = async () => {
 	const shopId = localStorage.getItem("shopId");
 
 	axios
-		.get(`/search/${shopId}/?${searchTerms}`)
+		.get(`/search/${shopId}/?searchTerm=${searchTerms}`)
 		.then((res) => {
 			console.log(res);
 		})
