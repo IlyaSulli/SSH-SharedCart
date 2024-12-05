@@ -1,6 +1,6 @@
-const Item = require('./../models/itemModel');
-const Shop = require('./../models/shopModel');
-const APIFeatures = require('./../APIFeatures');
+const Item = require('../models/itemModel');
+const Shop = require('../models/shopModel');
+const APIFeatures = require('../APIFeatures');
 
 exports.getShops = async (req, res) => {
    try {

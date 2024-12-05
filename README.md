@@ -22,4 +22,5 @@ In some student houses, students use grocery delivery services to have groceries
 - **18/11/2024**: A meeting was adjourned to discuss the tasks and the languages needed to start the project, including discussing who will be working on which parts of the project in order to best suit our points of expertise. It was planned that we would meet every week to disucss the direction of the project and to talk about changes made. It was set that Ilya and Sultan would work on the frontend and Hector and Coll would work on the backend for the timebeing
 - **19/11/2024**: The frontend concept was design and approved by the team, allowing work to begin for the frontend team. The work was split into two different parts, Sultan working on the shopping page whilst Ilya worked on the cart page
 - **20/11/2024**: The frontend design built using HTML and CSS for the cart was approved. Javascript was needed and the cart features was slowed down until the server APIs were designed in order to have test data.
-- **03/12/2024**: Began refactoring the backend code base to make it more in line with waht Node.js expects
+- **03/12/2024**: Began refactoring the backend code base to make it more in line with what Node.js expects
+- **05/12/2024**: Refactored the backend for the cart page as well as implemented APIs
