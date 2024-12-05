@@ -85,7 +85,7 @@
 				placeholder="Search for items..."
 				class="searchBar"
 			/>
-			<button class="navigationButton">
+			<button class="navigationButton" id="searchButton">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					height="24px"
@@ -102,7 +102,7 @@
 		<section id="searchedItems">
 			<div class="layer1container">
 				<div class="itemList">
-					<div class="itemContainer layer2container">
+					<div class="itemContainer layer2container" id="item1">
 						<div class="itemAdvertisement">
 							<div class="itemImageContainer layer3container">
 								<div class="itemImage"></div>
@@ -135,7 +135,7 @@
 							/>
 						</div>
 					</div>
-					<div class="itemContainer layer2container">
+					<div class="itemContainer layer2container" id="item2">
 						<div class="itemAdvertisement">
 							<div class="itemImageContainer layer3container">
 								<div class="itemImage"></div>
@@ -168,7 +168,7 @@
 							/>
 						</div>
 					</div>
-					<div class="itemContainer layer2container">
+					<div class="itemContainer layer2container" id="item3">
 						<div class="itemAdvertisement">
 							<div class="itemImageContainer layer3container">
 								<div class="itemImage"></div>
@@ -201,7 +201,7 @@
 							/>
 						</div>
 					</div>
-					<div class="itemContainer layer2container">
+					<div class="itemContainer layer2container" id="item4">
 						<div class="itemAdvertisement">
 							<div class="itemImageContainer layer3container">
 								<div class="itemImage"></div>
@@ -234,7 +234,7 @@
 							/>
 						</div>
 					</div>
-					<div class="itemContainer layer2container">
+					<div class="itemContainer layer2container" id="item5">
 						<div class="itemAdvertisement">
 							<div class="itemImageContainer layer3container">
 								<div class="itemImage"></div>
@@ -304,7 +304,8 @@
 				</div>
 			</div>
 		</section>
-		<script src="js/shop.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="js/framework.js"></script>
+		<script src="js/shop.js"></script>
 	</body>
 </html>
