@@ -28,7 +28,7 @@ exports.getShopItems = async (req, res) => {
       if (!req.query.searchTerm) {
          req.query.searchTerm = '';
       } else {
-         req.query.searchTerm.replace('-', ' ');
+         req.query.searchTerm = req.query.searchTerm.replace(/-/g, ' ');
       }
 
       const itemQuery = Item.find({
