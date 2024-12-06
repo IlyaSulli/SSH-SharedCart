@@ -2,10 +2,6 @@ header {
 	justify-content: right;
 }
 
-header > button {
-	margin-right: 20px;
-}
-
 svg {
 	fill: var(--defaultdarktextcolor);
 }
@@ -98,7 +94,36 @@ svg {
 	pointer-events: none;
 }
 
-.shopDropdown.open {
+.userSelection {
+	position: relative;
+	margin-right: 20px;
+}
+
+.userSelectionDropdown {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	position: absolute;
+	z-index: 2;
+	top: 100%;
+	width: 120px;
+	padding: 5px;
+	background-color: var(--layer2color);
+	border-radius: 10px;
+	transform-origin: top;
+	transform: scaleY(0);
+	transition: transform 0.3s ease;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.userSelectionDropdown button {
+	margin: 10px 0px;
+}
+
+.shopDropdown.open,
+.userSelectionDropdown.open {
 	transform: scaleY(1);
 	opacity: 1;
 	pointer-events: auto;
