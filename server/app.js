@@ -1,11 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 const { error } = require('console');
+const cors = require('cors');
 
 const searchRouter = require('./routes/searchRoutes');
 const cartRouter = require('./routes/cartRoutes');
 
 const app = express();
+app.use(cors());
 
 //Middleware
 //console.log(process.env.NODE_ENV);

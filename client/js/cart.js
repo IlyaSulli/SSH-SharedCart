@@ -257,8 +257,8 @@ async function getAPIRequest(endpoint, data) {
     await axios
       .get("http://localhost:5500/getCart/?")
       .then((res) => {
-        console.log(res.data.data.items);
-        return res.data.data.items;
+        console.log(res.data.data);
+        return res.data.data;
       })
       .catch(function (error) {
         renderErrorCart(error.errorCode, error.errorMessage);

@@ -6,7 +6,6 @@ const APIFeatures = require('./../APIFeatures');
 
 exports.getInfo = async (req, res) => {
    try {
-      console.log('here');
       const people = await Person.find();
 
       for (const person of people) {
