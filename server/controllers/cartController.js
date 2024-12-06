@@ -6,6 +6,7 @@ const APIFeatures = require('./../APIFeatures');
 
 exports.getInfo = async (req, res) => {
    try {
+      console.log('here');
       const people = await Person.find();
 
       for (const person of people) {
@@ -38,7 +39,7 @@ exports.getInfo = async (req, res) => {
    }
 };
 
-exports.updateQuantity = async (req,res) => {
+exports.updateQuantity = async (req, res) => {
    try {
       const itemQuery = PersonItem.find({
          ItemId: req.params.itemid,
@@ -69,23 +70,23 @@ exports.updateQuantity = async (req,res) => {
    }
 };
 
-exports.deleteItem = async (req,res) => {
-try {
-   const itemQuery = PersonItem.findOne({
-      PersonId: req.params.personid,
-      ItemId: req.params.itemid,
-   });
+exports.deleteItem = async (req, res) => {
+   try {
+      const itemQuery = PersonItem.findOne({
+         PersonId: req.params.personid,
+         ItemId: req.params.itemid,
+      });
 
-   const item = await PersonItem.deleteOne(itemQuery);
+      const item = await PersonItem.deleteOne(itemQuery);
 
-   res.status(200).json({
-      status: 'success',
-      requestedAt: req.requestTime,
-      data: {
-         item,
-      },
-   });
-} catch (err) {
+      res.status(200).json({
+         status: 'success',
+         requestedAt: req.requestTime,
+         data: {
+            item,
+         },
+      });
+   } catch (err) {
       console.log(err);
       res.status(404).json({
          status: 'fail',
@@ -94,7 +95,7 @@ try {
    }
 };
 
-exports.updateStatus = async (req,res) => {
+exports.updateStatus = async (req, res) => {
    try {
       var personQuery = await Person.findById(req.params.personid);
       var person;
@@ -127,10 +128,10 @@ exports.updateStatus = async (req,res) => {
          status: 'fail',
          message: err,
       });
-   } 
+   }
 };
 
-exports.getShops = async (req,res) => {
+exports.getShops = async (req, res) => {
    try {
       const shops = await Shop.find();
       res.status(200).json({
@@ -149,7 +150,7 @@ exports.getShops = async (req,res) => {
    }
 };
 
-exports.getSelectedShop = async (req,res) => {
+exports.getSelectedShop = async (req, res) => {
    try {
       const items = await PersonItem.find();
       if (items.length != 0) {
@@ -173,7 +174,7 @@ exports.getSelectedShop = async (req,res) => {
    }
 };
 
-exports.getUsers = async (req,res) => {
+exports.getUsers = async (req, res) => {
    try {
       const people = await Person.find();
       res.status(200).json({
@@ -192,7 +193,7 @@ exports.getUsers = async (req,res) => {
    }
 };
 
-exports.getCartCount = async (req,res) => {
+exports.getCartCount = async (req, res) => {
    try {
       const personitems = await PersonItem.find({
          PersonId: req.params.personid,
