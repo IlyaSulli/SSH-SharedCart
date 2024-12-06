@@ -13,6 +13,7 @@ function renderCart(userId, firstname, lastname, cartInfo, deliveryFeeSplit, car
     container.classList.add("personalCart", "layer1container");
     const summaryDiv = document.createElement("div");
     summaryDiv.classList.add("personalCartSummary");
+    summaryDiv.id = userId;
     summaryDiv.innerHTML = `
         <span class="dropdownIcon">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-360 280-560h400L480-360Z"/></svg>
@@ -64,7 +65,6 @@ function renderCart(userId, firstname, lastname, cartInfo, deliveryFeeSplit, car
             if (isUpdated) {
                 console.log(`Quantity for item ${item._id} updated to ${newQuantity}`);
                 quantityInput.value = newQuantity;
-                // TODO: Reload with updated info
             } else {
                 console.error(`Failed to update quantity for item ${item._id}`);
             }
@@ -76,8 +76,8 @@ function renderCart(userId, firstname, lastname, cartInfo, deliveryFeeSplit, car
         removeButton.addEventListener("click", async (event) => {
             const isRemoved = await sendAPIRequest("removeItem", {userId: userId, itemId: item._id});
             if (isRemoved){
-                console.log(`Removed item${item._id}`);
-                // TODO: Reload with updated info
+                console.log(`Removed item ${item._id}`);
+                itemDiv.remove();
             }
         })
     }
@@ -125,6 +125,8 @@ function renderErrorCart(errorCode, errorMessage) {
         </div>
     `;
     document.body.appendChild(container);
+
+    document.getElementById("errorButton").addEventListener("click", () => location.reload());
 }
 
 function renderEmptyCart() {
@@ -157,7 +159,7 @@ function modifySelectedCart(userId){
                 const removeButton = item.getElementsByClassName("removeButton")[0];
                 quantityInput.disabled = false;
                 removeButton.disabled = false;
-            //     TODO: Modify to change the name for the confirm button for selected user
+            
             }
         }
     }
@@ -200,7 +202,7 @@ function calculatePersonalCartSubtotal(cart){
 
 async function sendAPIRequest(endpoint, data) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api?${endpoint}`, {
+        const response = await fetch(`http://127.0.0.1:8000/${endpoint}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -221,7 +223,7 @@ async function sendAPIRequest(endpoint, data) {
 
 // On page load, build the cart page
 document.addEventListener("DOMContentLoaded", async function() {
-    let carts = await sendAPIRequest("getListOfItems", {});
+    let carts = await sendAPIRequest("cart", {});
     if (carts.length === 0) {
         // If there are no user's in the cart, render the empty cart HTML
         renderEmptyCart();
@@ -239,9 +241,5 @@ document.addEventListener("DOMContentLoaded", async function() {
         let selectedID = localStorage.getItem("selectedID");
         modifySelectedCart(selectedID); // Update the selected user to be able to confirm and update items for themselves
         renderCheckout(cartsSubtotal, shop.deliveryfee);
-    }
-    const errorButton = document.querySelector(".errorButton");
-    if (errorButton) {
-        errorButton.addEventListener("click", () => location.reload());
     }
 });
