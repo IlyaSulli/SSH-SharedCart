@@ -1,8 +1,8 @@
-const Item = require('../models/itemModel');
-const Shop = require('../models/shopModel');
-const Person = require('../models/peopleModel');
-const PersonItem = require('../models/peopleItemModel');
-const APIFeatures = require('../APIFeatures');
+const Item = require('./../models/itemModel');
+const Shop = require('./../models/shopModel');
+const Person = require('./../models/peopleModel');
+const PersonItem = require('./../models/peopleItemModel');
+const APIFeatures = require('./../APIFeatures');
 
 exports.getInfo = async (req, res) => {
    try {
@@ -138,6 +138,75 @@ exports.getShops = async (req,res) => {
          requestedAt: req.requestTime,
          data: {
             shops,
+         },
+      });
+   } catch (err) {
+      console.log(err);
+      res.status(404).json({
+         status: 'fail',
+         message: err,
+      });
+   }
+};
+
+exports.getSelectedShop = async (req,res) => {
+   try {
+      const items = await PersonItem.find();
+      if (items.length != 0) {
+         const itemId = items[0].ItemId;
+         const shopId = await Item.findById(itemId);
+         const shop = await Shop.findById(shopId.ShopID);
+         res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            data: {
+               shop,
+            },
+         });
+      }
+   } catch (err) {
+      console.log(err);
+      res.status(404).json({
+         status: 'fail',
+         message: err,
+      });
+   }
+};
+
+exports.getUsers = async (req,res) => {
+   try {
+      const people = await Person.find();
+      res.status(200).json({
+         status: 'success',
+         requestedAt: req.requestTime,
+         data: {
+            people,
+         },
+      });
+   } catch (err) {
+      console.log(err);
+      res.status(404).json({
+         status: 'fail',
+         message: err,
+      });
+   }
+};
+
+exports.getCartCount = async (req,res) => {
+   try {
+      const personitems = await PersonItem.find({
+         PersonId: req.params.personid,
+      });
+      var cart = [];
+      for (item of personitems) {
+         const chosenItem = await Item.findById(item.ItemId);
+         cart.push(chosenItem);
+      }
+      res.status(200).json({
+         status: 'success',
+         requestedAt: req.requestTime,
+         data: {
+            cart,
          },
       });
    } catch (err) {
