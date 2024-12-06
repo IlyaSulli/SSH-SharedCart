@@ -1,0 +1,311 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>SSH - Shopping</title>
+		<link rel="stylesheet" href="css/framework.css" />
+		<link rel="stylesheet" href="css/shop.css" />
+		<link
+			rel="icon"
+			href="assets/ssh-logo.png"
+			type="image/png"
+			sizes="32x32"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<header>
+			<button
+				class="layer2container navigationButton buttonText"
+				id="userId"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					height="24px"
+					viewBox="0 -960 960 960"
+					width="24px"
+					fill="#e8eaed"
+				>
+					<path
+						d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"
+					/>
+				</svg>
+
+				John D
+			</button>
+			<a href="cart.html">
+				<button class="layer2container navigationButton" id="cart">
+					<svg
+						id="cartIcon"
+						xmlns="http://www.w3.org/2000/svg"
+						height="24px"
+						viewBox="0 -960 960 960"
+						width="24px"
+						fill="#e8eaed"
+					>
+						<path
+							d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"
+						/>
+					</svg>
+					<span id="cartCount">2</span>
+				</button>
+			</a>
+			<div id="themeToggle">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					height="24px"
+					viewBox="0 -960 960 960"
+					width="24px"
+					fill="#e8eaed"
+				>
+					<path
+						d="M396-396q-32-32-58.5-67T289-537q-5 14-6.5 28.5T281-480q0 83 58 141t141 58q14 0 28.5-2t28.5-6q-39-22-74-48.5T396-396Zm57-56q51 51 114 87.5T702-308q-40 51-98 79.5T481-200q-117 0-198.5-81.5T201-480q0-65 28.5-123t79.5-98q20 72 56.5 135T453-452Zm290 72q-20-5-39.5-11T665-405q8-18 11.5-36.5T680-480q0-83-58.5-141.5T480-680q-20 0-38.5 3.5T405-665q-8-19-13.5-38T381-742q24-9 49-13.5t51-4.5q117 0 198.5 81.5T761-480q0 26-4.5 51T743-380ZM440-840v-120h80v120h-80Zm0 840v-120h80V0h-80Zm323-706-57-57 85-84 57 56-85 85ZM169-113l-57-56 85-85 57 57-85 84Zm671-327v-80h120v80H840ZM0-440v-80h120v80H0Zm791 328-85-85 57-57 84 85-56 57ZM197-706l-84-85 56-57 85 85-57 57Zm199 310Z"
+					/>
+				</svg>
+			</div>
+		</header>
+		<section class="searchBarHero layer1container">
+			<div class="shopSelection">
+				<div class="tesco" id="shopLogoBackground">
+					<div id="shopLogo"></div>
+				</div>
+				<div class="shopDropdown">
+					<div class="shopOption tesco" id="tescoOption">
+						<div></div>
+					</div>
+					<div class="shopOption sainsburys" id="sainsburysOption">
+						<div></div>
+					</div>
+					<div class="shopOption asda" id="asdaOption">
+						<div></div>
+					</div>
+				</div>
+			</div>
+			<input
+				type="text"
+				placeholder="Search for items..."
+				class="searchBar"
+			/>
+			<button class="navigationButton" id="searchButton">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					height="24px"
+					viewBox="0 -960 960 960"
+					width="24px"
+					fill="#e8eaed"
+				>
+					<path
+						d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"
+					/>
+				</svg>
+			</button>
+		</section>
+		<section id="searchedItems">
+			<div class="layer1container">
+				<div class="itemList">
+					<div class="itemContainer layer2container" id="item1">
+						<div class="itemAdvertisement">
+							<div class="itemImageContainer layer3container">
+								<div class="itemImage"></div>
+							</div>
+							<div class="itemMeta">
+								<h4 class="itemName">
+									Lorem ipsum lorem ipsum lorem ipsum
+								</h4>
+								<p class="itemDescription">
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+								</p>
+							</div>
+						</div>
+						<div class="itemPurchasing">
+							<span class="itemPrice itemPriceText">£1.79</span>
+							<label
+								>Quantity:
+								<input
+									type="number"
+									class="itemQuantity layer3container"
+									name="quantity"
+									min="1"
+									max="99"
+							/></label>
+							<input
+								type="submit"
+								class="addButton buttonText layer3container"
+								value="Add"
+							/>
+						</div>
+					</div>
+					<div class="itemContainer layer2container" id="item2">
+						<div class="itemAdvertisement">
+							<div class="itemImageContainer layer3container">
+								<div class="itemImage"></div>
+							</div>
+							<div class="itemMeta">
+								<h4 class="itemName">
+									Lorem ipsum lorem ipsum lorem ipsum
+								</h4>
+								<p class="itemDescription">
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+								</p>
+							</div>
+						</div>
+						<div class="itemPurchasing">
+							<span class="itemPrice itemPriceText">£1.79</span>
+							<label
+								>Quantity:
+								<input
+									type="number"
+									class="itemQuantity layer3container"
+									name="quantity"
+									min="1"
+									max="99"
+							/></label>
+							<input
+								type="submit"
+								class="addButton buttonText layer3container"
+								value="Add"
+							/>
+						</div>
+					</div>
+					<div class="itemContainer layer2container" id="item3">
+						<div class="itemAdvertisement">
+							<div class="itemImageContainer layer3container">
+								<div class="itemImage"></div>
+							</div>
+							<div class="itemMeta">
+								<h4 class="itemName">
+									Lorem ipsum lorem ipsum lorem ipsum
+								</h4>
+								<p class="itemDescription">
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+								</p>
+							</div>
+						</div>
+						<div class="itemPurchasing">
+							<span class="itemPrice itemPriceText">£1.79</span>
+							<label
+								>Quantity:
+								<input
+									type="number"
+									class="itemQuantity layer3container"
+									name="quantity"
+									min="1"
+									max="99"
+							/></label>
+							<input
+								type="submit"
+								class="addButton buttonText layer3container"
+								value="Add"
+							/>
+						</div>
+					</div>
+					<div class="itemContainer layer2container" id="item4">
+						<div class="itemAdvertisement">
+							<div class="itemImageContainer layer3container">
+								<div class="itemImage"></div>
+							</div>
+							<div class="itemMeta">
+								<h4 class="itemName">
+									Lorem ipsum lorem ipsum lorem ipsum
+								</h4>
+								<p class="itemDescription">
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+								</p>
+							</div>
+						</div>
+						<div class="itemPurchasing">
+							<span class="itemPrice itemPriceText">£1.79</span>
+							<label
+								>Quantity:
+								<input
+									type="number"
+									class="itemQuantity layer3container"
+									name="quantity"
+									min="1"
+									max="99"
+							/></label>
+							<input
+								type="submit"
+								class="addButton buttonText layer3container"
+								value="Add"
+							/>
+						</div>
+					</div>
+					<div class="itemContainer layer2container" id="item5">
+						<div class="itemAdvertisement">
+							<div class="itemImageContainer layer3container">
+								<div class="itemImage"></div>
+							</div>
+							<div class="itemMeta">
+								<h4 class="itemName">
+									Lorem ipsum lorem ipsum lorem ipsum
+								</h4>
+								<p class="itemDescription">
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiusmod tempor
+								</p>
+							</div>
+						</div>
+						<div class="itemPurchasing">
+							<span class="itemPrice itemPriceText">£1.79</span>
+							<label
+								>Quantity:
+								<input
+									type="number"
+									class="itemQuantity layer3container"
+									name="quantity"
+									min="1"
+									max="99"
+							/></label>
+							<input
+								type="submit"
+								class="addButton buttonText layer3container"
+								value="Add"
+							/>
+						</div>
+					</div>
+				</div>
+				<div class="pageNavigation">
+					<button
+						class="navigationButton layer2container"
+						id="previous"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							height="24px"
+							viewBox="0 -960 960 960"
+							width="24px"
+							fill="#e8eaed"
+						>
+							<path
+								d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+							/>
+						</svg>
+
+						Previous
+					</button>
+					<button class="navigationButton layer2container" id="next">
+						Next
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							height="24px"
+							viewBox="0 -960 960 960"
+							width="24px"
+							fill="#e8eaed"
+						>
+							<path
+								d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
+							/>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</section>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="js/framework.js"></script>
+		<script src="js/shop.js"></script>
+	</body>
+</html>

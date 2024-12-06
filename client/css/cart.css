@@ -1,0 +1,229 @@
+/* Navigation */
+
+#backToShoppingButton{
+    display: flex;
+}
+
+/* Hero */
+
+#cartHero{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5dvh;
+    margin-bottom: 5dvh;
+}
+
+#shopLogoBackground{
+    display: flex;
+    width: 150px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    /* Test Data to be changed with js */
+    background-color: #0958A2;
+    margin-right: 40px;
+}
+
+#shopLogo{
+    display: inline;
+    width: 90px;
+    height: 80px;
+    object-fit: fill;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* Test Data to be changed with js */
+    background-image:url("../assets/shopLogos/Tesco-logo.png");
+}
+
+/* Personal Cart */
+
+#personalCarts{
+    display: grid;
+    grid-gap: 10px;
+    align-self: center;
+    justify-content: center;
+}
+
+.personalCart{
+    align-self: center;
+    justify-content: center;
+    width: 800px;
+    max-width: 1200px;
+}
+
+.personalCartDropdown {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 20px;
+    width: auto;
+    display: block;
+}
+
+.personalCart.expanded .personalCartDropdown {
+    max-height: 100000px;
+    padding: 20px 20px;
+    overflow: visible;
+    width: auto;
+}
+
+/* Personal Cart Summary */
+
+.personalCartSummary{
+    display: flex;
+    align-items: center;
+    margin: 10px 20px;
+    min-width: 300px;
+
+}
+
+.cartConfirmButton{
+    display: flex;
+    margin-left:20px;
+    max-width: 200px;
+    width: 200px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Test Data to be changed with js */
+    background-color: var(--primary);
+    color: var(--defaultlighttextcolor);
+    border: none;
+}
+
+.cartConfirmButton:hover{
+    background-color: var(--primaryhover);
+}
+
+.cartConfirmButton:active{
+    border: 1px solid var(--primary);
+}
+
+.cartPersonTotal{
+    margin-right: 10px;
+    margin-left: auto;
+}
+
+.dropdownIcon{
+    margin-right: 10px;
+}
+
+.dropdownIcon > svg {
+    transition: transform 0.3s ease;
+    transform: rotate(-90deg);
+    fill: var(--defaultdarktextcolor);
+}
+
+.personalCart.expanded .dropdownIcon > svg {
+    transform: rotate(0deg);
+}
+
+.cartPersonName{
+    margin-right: 20px;
+}
+
+/* Personal Cart Items */
+
+.removeButton{
+    background-color: var(--error);
+    color: var(--defaultlighttextcolor);
+    border: none;
+    padding: 11px 22px;
+    margin-right: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.removeButton:hover{
+    background-color: var(--errorhover);
+}
+
+.removeButton:active{
+    border: 1px solid var(--error);
+    margin-right: 19px;
+    margin-left: -1px;
+}
+
+/* Cart Total */
+
+.personalCartCheckoutWrapper{
+    width: 100%;
+    align-items: end;
+    display: flex;
+    justify-content: end;
+}
+
+.personalCartCheckout{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.personalCartTotalItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.personalCartTotalItem > span{
+    color: var(--defaultdarktextcolor);
+}
+
+.personalCartTotal, .personalDeliveryFee{
+    padding-bottom: 5px;
+}
+
+.personalDivider{
+    width: 280px;
+    border: 1px solid var(--defaultdarktextcolor);
+    opacity: 0.5;
+}
+
+.personalTotal > span{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Checkout */
+
+#checkout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 20dvh;
+}
+
+#checkoutDivider{
+    width: 800px;
+    max-width: 1200px;
+}
+
+#checkoutWrapper{
+    width: 800px;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.checkoutItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#checkoutSide{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.checkoutItem>h4{
+    margin-bottom: 0;
+}
