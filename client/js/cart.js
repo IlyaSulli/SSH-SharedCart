@@ -50,7 +50,6 @@ function renderCart(
   // Loop through cart items
   for (let i = 0; i < cartInfo.length; i++) {
     const item = cartInfo[i];
-    console.log(item);
     const itemDiv = document.createElement("div");
     itemDiv.classList.add("itemContainer", "layer2container");
     itemDiv.innerHTML = `
@@ -226,10 +225,8 @@ function renderCheckout(subtotal, deliveryFee) {
 function calculatePersonalCartSubtotal(cart) {
   let total = 0.0;
   cart.forEach((item) => {
-    console.log(item);
     total += item.ItemCost*item.Quantity.Quantity;
   });
-  console.log(`Subtotal: £${total.toFixed(2)}`);
   return total;
 }
 
