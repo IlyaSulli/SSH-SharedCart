@@ -162,6 +162,7 @@ exports.getShops = async (req, res) => {
 exports.getSelectedShop = async (req, res) => {
    try {
       const items = await PersonItem.find();
+      console.log("hello");
       if (items.length != 0) {
          const itemId = items[0].ItemId;
          const shopId = await Item.findById(itemId);
