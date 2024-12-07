@@ -230,27 +230,6 @@ function calculatePersonalCartSubtotal(cart) {
   return total;
 }
 
-async function sendAPIRequest(endpoint, data) {
-  try {
-    const response = await fetch(`http://127.0.0.1:8000/${endpoint}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      renderErrorCart(response.status, response.statusText);
-    }
-
-    return await response.json();
-  } catch (error) {
-    renderErrorCart(500, "Internal Server Error");
-    console.error("Failed to send data:", error);
-  }
-}
-
 async function getAPIRequest(endpoint, data) {
   try {
     const response = await axios.get(`http://localhost:5500/${endpoint}/?${data}`);
