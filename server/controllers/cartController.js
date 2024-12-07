@@ -17,9 +17,15 @@ exports.getInfo = async (req, res) => {
          for (const item of items) {
             let itemid = item.ItemId.toString();
             const itemObj = await Item.findById(itemid);
-            cart.push(itemObj);
+            const updatedItem = {
+               ...itemObj.toObject(),  
+               _id: itemid,
+            };
+            cart.push(updatedItem);
          }
-         person.Cart = cart.toString();
+         let jsonString = JSON.stringify(cart, null, 0);
+         jsonString = `{${jsonString}}`;
+         person.Cart = jsonString;
       }
 
       res.status(200).json({
@@ -152,6 +158,7 @@ exports.getShops = async (req, res) => {
 exports.getSelectedShop = async (req, res) => {
    try {
       const items = await PersonItem.find();
+      console.log("hello");
       if (items.length != 0) {
          const itemId = items[0].ItemId;
          const shopId = await Item.findById(itemId);
