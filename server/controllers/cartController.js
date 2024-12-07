@@ -17,9 +17,14 @@ exports.getInfo = async (req, res) => {
          for (const item of items) {
             let itemid = item.ItemId.toString();
             const itemObj = await Item.findById(itemid);
+            const quantityItem = await PersonItem.findOne({
+               PersonId : id,
+               ItemId: itemid,
+            });
             const updatedItem = {
                ...itemObj.toObject(),  
                _id: itemid,
+               Quantity: quantityItem,
             };
             cart.push(updatedItem);
          }
