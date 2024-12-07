@@ -179,6 +179,7 @@ label{
     align-items: center;
     padding: 7px 0 7px 10px;
     min-height: 90px;
+    justify-content: space-between;
 }
 
 .itemImageContainer{
