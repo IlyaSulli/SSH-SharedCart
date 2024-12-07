@@ -24,7 +24,6 @@ exports.getInfo = async (req, res) => {
             cart.push(updatedItem);
          }
          let jsonString = JSON.stringify(cart, null, 0);
-         jsonString = `{${jsonString}}`;
          person.Cart = jsonString;
       }
 
