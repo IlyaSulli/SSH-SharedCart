@@ -189,9 +189,9 @@ const search = async () => {
 	// Setting maxPage
 	await axios
 		.get(
-			`http://localhost:5500/search/${localStorage.getItem(
-				"searchTerms"
-			)}/?searchTerm=${localStorage.getItem("shopId")}`
+			`http://localhost:5500/search/${searchTerms}/?searchTerm=${localStorage.getItem(
+				"shopId"
+			)}`
 		)
 		.then((res) => {
 			maxPage = Math.ceil(res.data.results / 5);
@@ -202,6 +202,7 @@ const search = async () => {
 
 	renderShopPage();
 };
+search();
 
 document.getElementById("previous").addEventListener("click", () => {
 	if (currentPage > 1) {
@@ -227,7 +228,6 @@ document.querySelector(".searchBar").addEventListener("keypress", (e) => {
 const addToCart = async (itemId, quantity) => {
 	const userId = localStorage.getItem("selectedID");
 	const shopId = localStorage.getItem("shopId");
-	console.log(shopId, userId, itemId, quantity);
 
 	await axios
 		.post(`http://localhost:5500/search/${shopId}`, {
