@@ -3,7 +3,7 @@
    "version": "1.0.0",
    "main": "server.js",
    "scripts": {
-      "start": "nodemon --no-deprecation server.js",
+      "start": "nodemon server.js",
       "test": "echo \"Error: no test specified\" && exit 1"
    },
    "author": "Coll MacCulloch",
@@ -15,6 +15,7 @@
       "express": "^4.21.2",
       "mongodb": "^6.11.0",
       "mongoose": "^8.8.4",
-      "morgan": "^1.10.0"
+      "morgan": "^1.10.0",
+      "nodemon": "^3.1.7"
    }
 }

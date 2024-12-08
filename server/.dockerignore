@@ -1,0 +1,4 @@
+node-modules/
+.txt
+.dockerignore
+.prettierc
