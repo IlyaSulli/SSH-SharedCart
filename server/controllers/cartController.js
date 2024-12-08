@@ -18,11 +18,11 @@ exports.getInfo = async (req, res) => {
             let itemid = item.ItemId.toString();
             const itemObj = await Item.findById(itemid);
             const quantityItem = await PersonItem.findOne({
-               PersonId : id,
+               PersonId: id,
                ItemId: itemid,
             });
             const updatedItem = {
-               ...itemObj.toObject(),  
+               ...itemObj.toObject(),
                _id: itemid,
                Quantity: quantityItem,
             };
@@ -162,7 +162,6 @@ exports.getShops = async (req, res) => {
 exports.getSelectedShop = async (req, res) => {
    try {
       const items = await PersonItem.find();
-      console.log("hello");
       if (items.length != 0) {
          const itemId = items[0].ItemId;
          const shopId = await Item.findById(itemId);
