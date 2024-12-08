@@ -10,7 +10,6 @@ const app = express();
 app.use(cors());
 
 //Middleware
-//console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
    app.use(morgan('dev'));
 }
