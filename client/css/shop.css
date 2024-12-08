@@ -176,6 +176,16 @@ svg {
 	align-items: center;
 }
 
+.itemImage > img {
+	width: 100px;
+	height: 100px;
+	object-fit: fill;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 5px;
+}
+
 .itemName {
 	text-decoration: underline;
 }
