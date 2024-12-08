@@ -77,6 +77,7 @@ const getUsers = async () => {
 				
 				${userList[0].FirstName} ${userList[0].Surname[0]}`;
 		localStorage.setItem("selectedID", userList[0]._id);
+		updateQuantity(userList[0]._id);
 
 		userList.forEach((user) => {
 			let newShopDiv = document.createElement("div");
@@ -107,10 +108,25 @@ const getUsers = async () => {
 						</svg> ${el.textContent.trim()}`;
 
 			localStorage.setItem("selectedID", el.id);
+			updateQuantity(el.id);
 		});
 	});
 };
 getUsers();
+
+const updateQuantity = async (userId) => {
+	await axios
+		.get(`http://localhost:5500/getCart/getCartCount/${userId}`)
+		.then((res) => {
+			const cartQuantity = res.data.data.cart.length;
+			const quantityEl = document.getElementById("cartCount");
+			if (cartQuantity < 1) quantityEl.style.display = "none";
+			else {
+				quantityEl.style.display = "block";
+				quantityEl.textContent = cartQuantity;
+			}
+		});
+};
 
 const renderShopPage = async () => {
 	await axios
@@ -242,4 +258,5 @@ const addToCart = async (itemId, quantity) => {
 			// handle error
 			console.error(error);
 		});
+	updateQuantity(userId);
 };
