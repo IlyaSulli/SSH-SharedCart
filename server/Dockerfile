@@ -3,7 +3,6 @@ WORKDIR /server
 COPY . .
 RUN npm --verbose install
 EXPOSE 5500
-EXPOSE 8000
 CMD [ "node", "server.js" ]
 
 
