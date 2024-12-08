@@ -33,7 +33,7 @@ document.querySelectorAll(".shopOption").forEach((el) => {
 const renderShopPage = async () => {
 	await axios
 		.get(
-			`/search/${localStorage.getItem(
+			`http://localhost:5500/search/${localStorage.getItem(
 				"shopId"
 			)}/?searchTerm=${searchTerms}&page=${currentPage}&limit=5`
 		)
@@ -46,8 +46,9 @@ const renderShopPage = async () => {
 				const price = item.ItemCost;
 				const imageSrc = item.ImageLink;
 				const description = item.ItemDescription;
+				let itemDiv = document.createElement("div");
 
-				const itemDiv = `
+				itemDiv.innerHTML = `
 		<div class="itemContainer layer2container" id="${itemId}">
 				<div class="itemAdvertisement">
 					<div class="itemImageContainer layer3container">
@@ -97,7 +98,7 @@ const search = async () => {
 	// Setting maxPage
 	await axios
 		.get(
-			`/search/${localStorage.getItem(
+			`http://localhost:5500/search/${localStorage.getItem(
 				"searchTerms"
 			)}/?searchTerm=${localStorage.getItem("shopId")}`
 		)
@@ -138,7 +139,7 @@ const addToCart = async (itemId, quantity) => {
 
 	await axios
 		.post(
-			`/search/${shopId}`,
+			`http://localhost:5500/search/${shopId}`,
 			JSON.stringify({
 				PersonId: userId,
 				ItemId: itemId,
