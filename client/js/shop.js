@@ -29,14 +29,34 @@ document.addEventListener("click", (e) => {
 	}
 });
 
-// Change the currentShop and logo displayed
-document.querySelectorAll(".shopOption").forEach((el) => {
-	el.addEventListener("click", (e) => {
-		currentShop = e.target.closest(".shopOption").classList[1];
-		localStorage.setItem("shopId", e.target.closest(".shopOption").id);
-		document.getElementById("shopLogoBackground").classList = currentShop;
+const getShops = async () => {
+	await axios.get(`http://localhost:5500/search/`).then((res) => {
+		const shopList = res.data.data.shops;
+
+		document.querySelector(".initialSelect").classList =
+			shopList[0].shopName.toLowerCase();
+
+		shopList.forEach((shop) => {
+			let newShopDiv = document.createElement("div");
+			newShopDiv.innerHTML = `<div class="shopOption ${shop.shopName.toLowerCase()}" id="${
+				shop._id
+			}">
+						<div></div>
+					</div>`;
+			document.querySelector(".shopDropdown").appendChild(newShopDiv);
+		});
 	});
-});
+	// Change the currentShop and logo displayed
+	document.querySelectorAll(".shopOption").forEach((el) => {
+		el.addEventListener("click", (e) => {
+			currentShop = e.target.closest(".shopOption").classList[1];
+			localStorage.setItem("shopId", e.target.closest(".shopOption").id);
+			document.getElementById("shopLogoBackground").classList =
+				currentShop;
+		});
+	});
+};
+getShops();
 
 const renderShopPage = async () => {
 	await axios
