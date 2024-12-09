@@ -255,9 +255,17 @@ function renderCheckout(subtotal, deliveryFee) {
 }
 
 function calculatePersonalCartSubtotal(cart) {
+  if (!Array.isArray(cart)) {
+    console.error("Invalid cart data");
+    return 0.0;
+  }
   let total = 0.0;
   cart.forEach((item) => {
-    total += item.ItemCost*item.Quantity.Quantity;
+    if (item && item.ItemCost && item.Quantity && item.Quantity.Quantity) {
+      total += item.ItemCost * item.Quantity.Quantity;
+    } else {
+      console.error("Invalid item in cart", item);
+    }
   });
   return total;
 }
