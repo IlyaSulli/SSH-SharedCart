@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - docker-add
+      - full-structure
   workflow_dispatch:
 
 jobs:
