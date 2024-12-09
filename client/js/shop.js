@@ -3,12 +3,27 @@ let itemsArray = [];
 let searchTerms = "";
 let currentPage,
 	maxPage = 1;
+let selectedShop;
 
 // Open and close dropdown on clicking the logo
 document.getElementById("shopLogoBackground").addEventListener("click", () => {
-	document.querySelector(".shopDropdown").classList.toggle("open");
-	document.querySelector(".searchBarHero").classList.toggle("open");
+	if (!selectedShop) {
+		document.querySelector(".shopDropdown").classList.toggle("open");
+		document.querySelector(".searchBarHero").classList.toggle("open");
+	}
 });
+
+const getSelectedShop = async () => {
+	await axios
+		.get("http://localhost:5500/getCart/getSelectedShop")
+		.then((res) => {
+			selectedShop = res.data.data.shop;
+			document.getElementById("shopLogoBackground").classList =
+				selectedShop.shopName.toLowerCase();
+			localStorage.setItem("shopId", selectedShop._id);
+		});
+};
+getSelectedShop();
 
 document.getElementById("currentUserButton").addEventListener("click", () => {
 	document.querySelector(".userSelectionDropdown").classList.toggle("open");
@@ -33,7 +48,7 @@ const getShops = async () => {
 	await axios.get(`http://localhost:5500/search/`).then((res) => {
 		const shopList = res.data.data.shops;
 
-		document.querySelector(".initialShop").classList =
+		document.getElementById("shopLogoBackground").classList =
 			shopList[0].shopName.toLowerCase();
 		localStorage.setItem("shopId", shopList[0]._id);
 
@@ -52,6 +67,7 @@ const getShops = async () => {
 		el.addEventListener("click", (e) => {
 			currentShop = e.target.closest(".shopOption").classList[1];
 			localStorage.setItem("shopId", e.target.closest(".shopOption").id);
+			selectedShop = currentShop;
 			document.getElementById("shopLogoBackground").classList =
 				currentShop;
 		});
@@ -116,7 +132,7 @@ getUsers();
 
 const updateQuantity = async (userId) => {
 	await axios
-		.get(`http://localhost:5500/getCart/getCartCount/${userId}`)
+		.get(`http://localhost:5500/getCart/getCartCount/?${userId}`)
 		.then((res) => {
 			const cartQuantity = res.data.data.cart.length;
 			const quantityEl = document.getElementById("cartCount");
@@ -211,7 +227,10 @@ const search = async () => {
 			)}`
 		)
 		.then((res) => {
-			showNotification("success", "Successfully searched for items: "+ searchTerms);
+			showNotification(
+				"success",
+				"Successfully searched for items: " + searchTerms
+			);
 			maxPage = Math.ceil(res.data.results / 5);
 		})
 		.catch(function (error) {
