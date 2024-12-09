@@ -17,11 +17,13 @@ const getSelectedShop = async () => {
 	await axios
 		.get("http://localhost:5500/getCart/getSelectedShop")
 		.then((res) => {
-			selectedShop = res.data.data.shop;
-			if (selectedShop) {
-				document.getElementById("shopLogoBackground").classList =
-					selectedShop.shopName.toLowerCase();
-				localStorage.setItem("shopId", selectedShop._id);
+			if (res.data.data) {
+				selectedShop = res.data.data.shop;
+				if (selectedShop) {
+					document.getElementById("shopLogoBackground").classList =
+						selectedShop.shopName.toLowerCase();
+					localStorage.setItem("shopId", selectedShop._id);
+				}
 			}
 		});
 };
@@ -72,6 +74,7 @@ const getShops = async () => {
 			selectedShop = currentShop;
 			document.getElementById("shopLogoBackground").classList =
 				currentShop;
+			search();
 		});
 	});
 };
