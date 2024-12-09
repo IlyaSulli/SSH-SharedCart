@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: "Build"
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     permissions:
       packages: write
