@@ -1,0 +1,21 @@
+{
+   "name": "client",
+   "version": "1.0.0",
+   "main": "server.js",
+   "scripts": {
+      "start": "nodemon server.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "author": "Coll MacCulloch",
+   "license": "ISC",
+   "description": "",
+   "dependencies": {
+      "cors": "^2.8.5",
+      "dotenv": "^16.4.7",
+      "express": "^4.21.2",
+      "mongodb": "^6.11.0",
+      "mongoose": "^8.8.4",
+      "morgan": "^1.10.0",
+      "nodemon": "^3.1.7"
+   }
+}
