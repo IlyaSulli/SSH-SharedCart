@@ -55,13 +55,13 @@ exports.getInfo = async (req, res) => {
 exports.updateQuantity = async (req, res) => {
    try {
       const itemQuery = PersonItem.find({
-         ItemId: req.params.itemid,
-         PersonId: req.params.personid,
+         ItemId: req.query.itemId,
+         PersonId: req.query.userId,
       });
 
       const updateDocument = {
          $set: {
-            Quantity: req.params.quantity,
+            Quantity: req.query.quantity,
          },
       };
 
@@ -86,8 +86,8 @@ exports.updateQuantity = async (req, res) => {
 exports.deleteItem = async (req, res) => {
    try {
       const itemQuery = PersonItem.findOne({
-         PersonId: req.params.personid,
-         ItemId: req.params.itemid,
+         PersonId: req.query.userId,
+         ItemId: req.query.itemId,
       });
 
       const item = await PersonItem.deleteOne(itemQuery);
@@ -110,9 +110,8 @@ exports.deleteItem = async (req, res) => {
 
 exports.updateStatus = async (req, res) => {
    try {
-      var personQuery = await Person.findById(req.params.personid);
+      var personQuery = await Person.findById(req.query.userId);
       var person;
-      console.log(personQuery.Confirmed);
       if (personQuery.Confirmed == true) {
          const updateDocument = {
             $set: {
@@ -209,7 +208,7 @@ exports.getUsers = async (req, res) => {
 exports.getCartCount = async (req, res) => {
    try {
       const personitems = await PersonItem.find({
-         PersonId: req.params.personid,
+         PersonId: req.query.userId,
       });
       var cart = [];
       for (item of personitems) {

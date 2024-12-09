@@ -6,7 +6,7 @@ const router = express.Router();
 router.route('/').get(cartController.getInfo);
 
 router
-   .route('/updateQuantity/:personid/:itemid/:quantity')
+   .route('/updateQuantity')
    .get(cartController.updateQuantity);
 
 router.route('/deleteItem/:personid/:itemid').get(cartController.deleteItem);
