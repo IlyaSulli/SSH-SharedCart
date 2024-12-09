@@ -1,14 +1,25 @@
+.error404 {
+	height: 100%;
+	width: 100%;
+	background-color: var(--background);
+	position: absolute;
+	top: 0;
+	z-index: 4;
+	text-align: center;
+	display: none;
+}
+
 header {
 	justify-content: space-between;
 	margin-bottom: 40px;
 }
 
-#leftHeader{
+#leftHeader {
 	display: flex;
 	align-items: center;
 }
 
-#rightHeader{
+#rightHeader {
 	display: flex;
 	align-items: center;
 }
@@ -41,11 +52,11 @@ svg {
 	color: var(--defaultlighttextcolor);
 }
 
-#logo{
+#logo {
 	display: flex;
 	align-items: center;
-	width:50px;
-	height:50px;
+	width: 50px;
+	height: 50px;
 	border-radius: 5px;
 	margin-left: 20px;
 	padding-right: 30px;
@@ -293,7 +304,7 @@ svg {
 	justify-content: space-between;
 }
 
-#shopping{
+#shopping {
 	display: flex;
 	align-items: center;
 	flex-direction: column;

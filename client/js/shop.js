@@ -5,6 +5,10 @@ let currentPage,
 	maxPage = 1;
 let selectedShop;
 
+const throwError = () => {
+	document.querySelector(".error404").style.display = "block";
+};
+
 // Open and close dropdown on clicking the logo
 document.getElementById("shopLogoBackground").addEventListener("click", () => {
 	if (!selectedShop) {
@@ -214,6 +218,7 @@ const renderShopPage = async () => {
 			});
 		})
 		.catch(function (error) {
+			throwError();
 			console.error(error);
 		});
 };
@@ -240,6 +245,7 @@ const search = async () => {
 		})
 		.catch(function (error) {
 			showNotification("error", "Failed to search for items");
+			throwError();
 			console.error(error);
 		});
 
@@ -282,7 +288,7 @@ const addToCart = async (itemId, quantity) => {
 			console.log(res);
 		})
 		.catch(function (error) {
-			// handle error
+			throwError();
 			console.error(error);
 		});
 	updateQuantity(userId);
