@@ -17,6 +17,7 @@ function renderCart(
 ) {
   const container = document.createElement("div");
   container.classList.add("personalCart", "layer1container");
+  container.id = userId;
   const summaryDiv = document.createElement("div");
   summaryDiv.classList.add("personalCartSummary");
   summaryDiv.id = userId;
@@ -34,10 +35,26 @@ function renderCart(
     `;
   container.appendChild(summaryDiv);
 
-    // Accordian dropdown functionality
-    container.addEventListener("click", () => {
-      container.classList.toggle("expanded");
-    });
+  // Handle the confirm button
+  const confirmButton = summaryDiv.getElementsByClassName("cartConfirmButton")[0];
+  confirmButton.addEventListener("click", async () => {
+    const isConfirmed = await getAPIRequest("confirmCart", `userId=${userId}`);
+
+    if (isConfirmed) {
+      console.log(`Confirmed cart for user ${userId}`);
+      confirmButton.classList.add("confirmed");
+      confirmButton.innerText = "Unconfirm";
+    } else {
+      console.log(`Unconfirmed cart for user ${userId}`);
+      confirmButton.classList.remove("confirmed");
+      confirmButton.innerText = "Confirm";
+    }
+  });
+
+  // Accordian dropdown functionality
+  summaryDiv.addEventListener("click", () => {
+    container.classList.toggle("expanded");
+  });
 
   // Create the dropdown section
   const dropdownDiv = document.createElement("div");
@@ -74,11 +91,7 @@ function renderCart(
     const quantityInput = itemDiv.querySelector(".itemQuantity");
     quantityInput.addEventListener("change", async (event) => {
       let newQuantity = event.target.value;
-      newQuantity = await sendAPIRequest("updateQuantity", {
-        userId: userId,
-        itemId: item._id,
-        newQuantity: newQuantity,
-      });
+      newQuantity = await getAPIRequest("updateQuantity", `userId=${userId}&itemId=${item._id}&quantity=${newQuantity}`);
 
       if (newQuantity) {
         console.log(`Quantity for item ${item._id} updated to ${newQuantity}`);
@@ -91,10 +104,7 @@ function renderCart(
     // Handle item Removal
     const removeButton = itemDiv.querySelector(".removeButton");
     removeButton.addEventListener("click", async (event) => {
-      const isRemoved = await sendAPIRequest("removeItem", {
-        userId: userId,
-        itemId: item._id,
-      });
+      const isRemoved = await getAPIRequest("removeItem", `userId=${userId}&itemId=${item._id}`);
 
       if (isRemoved) {
         console.log(`Removed item ${item._id}`);
@@ -170,29 +180,30 @@ function renderEmptyCart() {
 }
 
 function modifySelectedCart(userId) {
-  const personalCarts = document.getElementsByClassName("personalCart");
-  for (let i = 0; i < personalCarts.length; i++) {
-    const personalCart = personalCarts[i];
-    const summaryDiv = personalCart.getElementsByClassName(
-      "personalCartSummary"
-    )[0];
-    const dropdownDiv = personalCart.getElementsByClassName(
-      "personalCartDropdown"
-    )[0];
-    const confirmButton =
-      summaryDiv.getElementsByClassName("cartConfirmButton")[0];
-    const dropdownItems = dropdownDiv.getElementsByClassName("itemContainer");
-    if (userId === i) {
-      confirmButton.disabled = false;
-      confirmButton.classList.add("currentUserConfirmButton");
-      for (let j = 0; j < dropdownItems.length; j++) {
-        const item = dropdownItems[j];
-        const quantityInput = item.getElementsByClassName("itemQuantity")[0];
-        const removeButton = item.getElementsByClassName("removeButton")[0];
-        quantityInput.disabled = false;
-        removeButton.disabled = false;
-      }
-    }
+  const personalCartsDiv = document.getElementById("personalCarts");
+  const personalCarts = document.getElementById(userId);
+
+  // Move the selected cart to the top of the list
+  if (personalCartsDiv.firstChild !== personalCarts) {
+    personalCartsDiv.insertBefore(personalCarts, personalCartsDiv.firstChild);
+  }
+
+  personalCarts.classList.add("expanded");
+
+  const summaryDiv = personalCarts.getElementsByClassName("personalCartSummary")[0];
+  const dropdownDiv = personalCarts.getElementsByClassName("personalCartDropdown")[0];
+  const confirmButton = summaryDiv.getElementsByClassName("cartConfirmButton")[0];
+  const dropdownItems = dropdownDiv.getElementsByClassName("itemContainer");
+
+  confirmButton.disabled = false;
+  confirmButton.classList.add("currentUserConfirmButton");
+
+  for (let j = 0; j < dropdownItems.length; j++) {
+    const item = dropdownItems[j];
+    const quantityInput = item.getElementsByClassName("itemQuantity")[0];
+    const removeButton = item.getElementsByClassName("removeButton")[0];
+    quantityInput.disabled = false;
+    removeButton.disabled = false;
   }
 }
 
@@ -271,6 +282,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       );
     });
     let selectedID = localStorage.getItem("selectedID");
+    console.log(selectedID);
     modifySelectedCart(selectedID); // Update the selected user to be able to confirm and update items for themselves
     renderCheckout(cartsSubtotal, shop.shop.DeliveryPrice);
   }
