@@ -18,9 +18,11 @@ const getSelectedShop = async () => {
 		.get("http://localhost:5500/getCart/getSelectedShop")
 		.then((res) => {
 			selectedShop = res.data.data.shop;
-			document.getElementById("shopLogoBackground").classList =
-				selectedShop.shopName.toLowerCase();
-			localStorage.setItem("shopId", selectedShop._id);
+			if (selectedShop) {
+				document.getElementById("shopLogoBackground").classList =
+					selectedShop.shopName.toLowerCase();
+				localStorage.setItem("shopId", selectedShop._id);
+			}
 		});
 };
 getSelectedShop();
