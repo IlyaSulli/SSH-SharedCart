@@ -8,7 +8,6 @@ exports.getInfo = async (req, res) => {
    try {
       const people = await Person.find();
       for (var i = 0; i < people.length; i++) {
-         console.log(i, people[i]);
          let id = people[i]._id.toString();
          let items = await PersonItem.find({
             PersonId: id,
@@ -28,7 +27,6 @@ exports.getInfo = async (req, res) => {
             };
             cart.push(updatedItem);
          }
-         //console.log(cart.length, people[i]);
          if (cart.length > 0) {
          let jsonString = JSON.stringify(cart, null, 0);
          people[i].Cart = jsonString;
