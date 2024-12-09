@@ -176,6 +176,13 @@ exports.getSelectedShop = async (req, res) => {
                shop,
             },
          });
+      } else {
+         res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            data: {
+            },
+         });
       }
    } catch (err) {
       console.log(err);
