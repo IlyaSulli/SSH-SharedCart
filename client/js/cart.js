@@ -42,7 +42,7 @@ function renderCart(
     const originalText = confirmButton.innerText;
     const originalBackgroundColor = confirmButton.style.backgroundColor;
     const originalColor = confirmButton.style.color;
-    const isConfirmed = await getAPIRequest("updateStatus", `userId=${userId}`);
+    const isConfirmed = await getAPIRequest("getCart/updateStatus", `userId=${userId}`);
     if (isConfirmed) {
       console.log(`Confirmed cart for user ${userId}`);
       confirmButton.classList.add("confirmed");
@@ -106,7 +106,7 @@ function renderCart(
     const quantityInput = itemDiv.querySelector(".itemQuantity");
     quantityInput.addEventListener("change", async (event) => {
       let newQuantity = event.target.value;
-      newQuantity = await getAPIRequest("updateQuantity", `userId=${userId}&itemId=${item._id}&quantity=${newQuantity}`);
+      newQuantity = await getAPIRequest("getCart/updateQuantity", `userId=${userId}&itemId=${item._id}&quantity=${newQuantity}`);
 
       if (newQuantity) {
         console.log(`Quantity for item ${item._id} updated to ${newQuantity}`);
@@ -120,7 +120,7 @@ function renderCart(
     const removeButton = itemDiv.querySelector(".removeButton");
     removeButton.addEventListener("click", async (event) => {
       console.log(`Removing item ${item._id}`);
-      const isRemoved = await getAPIRequest("deleteItem", `userId=${userId}&itemId=${item._id}`);
+      const isRemoved = await getAPIRequest("getCart/deleteItem", `userId=${userId}&itemId=${item._id}`);
       if (isRemoved) {
         console.log(`Removed item ${item._id}`);
         itemDiv.remove();
