@@ -3,4 +3,4 @@ config.env
 node_modules/
 config/
 package-lock.json
-.txt
+*.txt
