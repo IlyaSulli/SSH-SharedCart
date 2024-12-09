@@ -1,8 +1,8 @@
-const Item = require('./../models/itemModel');
-const Shop = require('./../models/shopModel');
-const Person = require('./../models/peopleModel');
-const PersonItem = require('./../models/peopleItemModel');
-const APIFeatures = require('./../APIFeatures');
+const Item = require(`${__dirname}/../models/itemModel`);
+const Shop = require(`${__dirname}/../models/shopModel`);
+const Person = require(`${__dirname}/../models/peopleModel`);
+const PersonItem = require(`${__dirname}/../models/peopleItemModel`);
+const APIFeatures = require(`${__dirname}/../APIFeatures`);
 
 exports.getInfo = async (req, res) => {
    try {
