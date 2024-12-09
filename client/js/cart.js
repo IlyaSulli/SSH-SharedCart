@@ -1,3 +1,6 @@
+total = 0;
+subtotals = {}; 
+
 function renderHero(shopName, shopImage, shopColor) {
   const shopBackground = document.getElementById("shopLogoBackground");
   shopBackground.style.backgroundColor = `#${shopColor}`;
@@ -47,12 +50,15 @@ function renderCart(
       console.log(`Confirmed cart for user ${userId}`);
       confirmButton.classList.add("confirmed");
       confirmButton.innerText = "Unconfirm";
+      showNotification("success", `Confirmed cart for ${firstname} ${lastname}`);
     } else if (isConfirmed === false) {
       console.log(`Unconfirmed cart for user ${userId}`);
       confirmButton.classList.remove("confirmed");
       confirmButton.innerText = "Confirm";
+      showNotification("success", `Unconfirmed cart for ${firstname} ${lastname}`);
     } else {
       console.error(`Failed to confirm cart for user ${userId}`);
+      showNotification("error", `Failed to confirm cart for ${firstname} ${lastname}`);
       confirmButton.innerText = "Failed to Confirm";
       confirmButton.style.backgroundColor = "#AF0F0F";
       confirmButton.style.color = "#FFFFFF";
@@ -106,13 +112,15 @@ function renderCart(
     const quantityInput = itemDiv.querySelector(".itemQuantity");
     quantityInput.addEventListener("change", async (event) => {
       let newQuantity = event.target.value;
-      newQuantity = await getAPIRequest("getCart/updateQuantity", `userId=${userId}&itemId=${item._id}&quantity=${newQuantity}`);
-
+      isNewQuantity = await getAPIRequest("getCart/updateQuantity", `userId=${userId}&itemId=${item._id}&quantity=${newQuantity}`);
       if (newQuantity) {
+        showNotification("success", `${item.ItemName} quantity updated to ${newQuantity}`);
         console.log(`Quantity for item ${item._id} updated to ${newQuantity}`);
-        quantityInput.value = newQuantity;
+        refreshCart();
       } else {
+        showNotification("error", `Failed to update quantity for ${item.ItemName}`);
         console.error(`Failed to update quantity for item ${item._id}`);
+        refreshCart();
       }
     });
 
@@ -122,11 +130,14 @@ function renderCart(
       console.log(`Removing item ${item._id}`);
       const isRemoved = await getAPIRequest("getCart/deleteItem", `userId=${userId}&itemId=${item._id}`);
       if (isRemoved) {
+        showNotification("success", `Removed item ${item.ItemName}`);
         console.log(`Removed item ${item._id}`);
         itemDiv.remove();
+        refreshCart();
       } else {
-        removeButton.textContent = "Failed to Remove";
+        showNotification("error", `Failed to remove item ${item.ItemName}`);
         console.error(`Failed to remove item ${item._id}`);
+        refreshCart();
       }
     });
   }
@@ -167,18 +178,19 @@ function renderErrorCart(errorCode, errorMessage) {
   const container = document.createElement("div");
   container.classList.add("errorCart", "layer1container");
   container.innerHTML = `
-        <div id="errorWrapper">
-            <div id="errorSummary">
-                <h3 id="errorCode">Error: ${errorCode}</h3>
-                <p id="errorMessage">${errorMessage}</p>
-                <button id="errorButton">Reload Cart</button>
+        <div class="infoCartWrapper">
+            <div class="infoCartSummary">
+                <h2 class="infoCartHeading">Error: ${errorCode}</h2>
+                <span class="infoCartMessage">${errorMessage}</span>
+                <img id="errorImage" src="assets/errorimg.png" alt="Error Image">
+                <button class="infoCartButton" class="button">Reload Cart</button>
             </div>
         </div>
     `;
-  document.body.appendChild(container);
+  document.getElementById("personalCarts").appendChild(container);
 
   document
-    .getElementById("errorButton")
+    .getElementsByClassName("errorButton")
     .addEventListener("click", () => location.reload());
 }
 
@@ -186,12 +198,15 @@ function renderEmptyCart() {
   const container = document.createElement("div");
   container.classList.add("emptyCart", "layer1container");
   container.innerHTML = `
-        <div class="emptyCartSummary">
-            <h3>Your cart is empty</h3>
-            <p>Add items to your cart to see them here.</p>
+        <div class="infoCartWrapper">
+            <div class="infoCartSummary">
+                <h2 class="infoCartHeading">The Cart is Empty</h2>
+                <span class="infoCartMessage">Head back to the shopping page and add items.</span>
+                <a href="shop.html"><button class="infoCartButton" class="button">Back to Shopping</button></a>
+            </div>
         </div>
     `;
-  const personalCartsDiv = document.getElementById("personalCarts");
+    document.getElementById("personalCarts").appendChild(container);
   personalCartsDiv.appendChild(container);
 }
 
@@ -256,7 +271,6 @@ function renderCheckout(subtotal, deliveryFee) {
 
 function calculatePersonalCartSubtotal(cart) {
   let total = 0.0;
-  console.log(cart);
   cart.forEach((item) => {
       total += item.ItemCost * item.Quantity;
   });
@@ -270,16 +284,46 @@ async function getAPIRequest(endpoint, data) {
     return response.data.data;
   } catch (error) {
     if (error.response) {
-      renderErrorCart(error.response.status, error.response.statusText);
+      renderErrorCart(error.response.status, error.message);
     } else {
+      showNotification("error", "Failed to connect to the server");
       renderErrorCart(500, "Internal Server Error");
     }
+    showNotification("error", `Failed to send data for API ${endpoint}: ${error}`);
     console.error(`Failed to send data for API ${endpoint}:`, error);
   }
 }
 
+async function refreshCart(){
+  const scrollPosition = window.scrollY;
+  let carts = await getAPIRequest("getCart", "");
+  let shop = await getAPIRequest("getCart/getSelectedShop", "");
+  const deliveryFeeSplit = (shop.shop.DeliveryPrice / carts.people.length).toFixed(2);
+  let cartsSubtotal = 0;
+  document.getElementById("personalCarts").innerHTML = ""; // Clear the current cart content
+  carts.people.forEach((cart) => {
+    let subtotal = calculatePersonalCartSubtotal(JSON.parse(cart.Cart));
+    cartsSubtotal += subtotal;
+    renderCart(
+      cart._id,
+      cart.FirstName,
+      cart.Surname,
+      JSON.parse(cart.Cart),
+      deliveryFeeSplit,
+      subtotal,
+      cart.Confirmed
+    );
+  });
+  let selectedID = localStorage.getItem("selectedID");
+  modifySelectedCart(selectedID);
+  renderCheckout(cartsSubtotal, shop.shop.DeliveryPrice);
+
+  window.scrollTo(0, scrollPosition); // Restore the scroll position
+}
+
 // On page load, build the cart page
 document.addEventListener("DOMContentLoaded", async function () {
+  showNotification("info", "Loading cart...");
   let carts = await getAPIRequest("getCart", "");
   if (carts.people.length === 0) {
     // If there are no user's in the cart, render the empty cart HTML
@@ -305,8 +349,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       );
     });
     let selectedID = localStorage.getItem("selectedID");
-    console.log(selectedID);
     modifySelectedCart(selectedID); // Update the selected user to be able to confirm and update items for themselves
     renderCheckout(cartsSubtotal, shop.shop.DeliveryPrice);
   }
+  showNotification("success", "Cart loaded successfully");
 });

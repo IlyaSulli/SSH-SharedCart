@@ -202,7 +202,7 @@ const search = async () => {
 	searchTerms = document
 		.querySelector(".searchBar")
 		.value.replace(/\s+/g, "-"); // Replacing Whitespace characters
-
+	showNotification("info", "Searching for items...");
 	// Setting maxPage
 	await axios
 		.get(
@@ -211,9 +211,11 @@ const search = async () => {
 			)}`
 		)
 		.then((res) => {
+			showNotification("success", "Successfully searched for items: "+ searchTerms);
 			maxPage = Math.ceil(res.data.results / 5);
 		})
 		.catch(function (error) {
+			showNotification("error", "Failed to search for items");
 			console.error(error);
 		});
 

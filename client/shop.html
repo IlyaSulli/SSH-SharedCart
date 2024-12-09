@@ -4,12 +4,14 @@
 		<title>SSH - Shopping</title>
 		<link rel="stylesheet" href="css/framework.css" />
 		<link rel="stylesheet" href="css/shop.css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link
 			rel="icon"
 			href="assets/ssh-logo.png"
 			type="image/png"
 			sizes="32x32"
 		/>
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 	<body>
@@ -53,7 +55,7 @@
 							d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"
 						/>
 					</svg>
-					<span id="cartCount">2</span>
+					<span id="cartCount">0</span>
 				</button>
 			</a>
 			<div id="themeToggle">
@@ -71,70 +73,72 @@
 			</div>
 		</div>
 		</header>
-		<section class="searchBarHero layer1container">
-			<div class="shopSelection">
-				<div class="initialShop tesco" id="shopLogoBackground">
-					<div id="shopLogo"></div>
+		<section id="shopping">
+			<section class="searchBarHero layer1container">
+				<div class="shopSelection">
+					<div class="initialShop tesco" id="shopLogoBackground">
+						<div id="shopLogo"></div>
+					</div>
+					<div class="shopDropdown"></div>
 				</div>
-				<div class="shopDropdown"></div>
-			</div>
-			<input
-				type="text"
-				placeholder="Search for items..."
-				class="searchBar"
-			/>
-			<button class="navigationButton" id="searchButton">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					height="24px"
-					viewBox="0 -960 960 960"
-					width="24px"
-					fill="#e8eaed"
-				>
-					<path
-						d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"
-					/>
-				</svg>
-			</button>
-		</section>
-		<section id="searchedItems">
-			<div class="layer1container">
-				<div class="itemList"></div>
-				<div class="pageNavigation">
-					<button
-						class="navigationButton layer2container"
-						id="previous"
+				<input
+					type="text"
+					placeholder="Search for items..."
+					class="searchBar"
+				/>
+				<button class="navigationButton" id="searchButton">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="24px"
+						viewBox="0 -960 960 960"
+						width="24px"
+						fill="#e8eaed"
 					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							height="24px"
-							viewBox="0 -960 960 960"
-							width="24px"
-							fill="#e8eaed"
+						<path
+							d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"
+						/>
+					</svg>
+				</button>
+			</section>
+			<section id="searchedItems">
+				<div class="layer1container">
+					<div class="itemList"></div>
+					<div class="pageNavigation">
+						<button
+							class="navigationButton layer2container"
+							id="previous"
 						>
-							<path
-								d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
-							/>
-						</svg>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 -960 960 960"
+								width="24px"
+								fill="#e8eaed"
+							>
+								<path
+									d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"
+								/>
+							</svg>
 
-						Previous
-					</button>
-					<button class="navigationButton layer2container" id="next">
-						Next
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							height="24px"
-							viewBox="0 -960 960 960"
-							width="24px"
-							fill="#e8eaed"
-						>
-							<path
-								d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
-							/>
-						</svg>
-					</button>
+							Previous
+						</button>
+						<button class="navigationButton layer2container" id="next">
+							Next
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 -960 960 960"
+								width="24px"
+								fill="#e8eaed"
+							>
+								<path
+									d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
+								/>
+							</svg>
+						</button>
+					</div>
 				</div>
-			</div>
+			</section>
 		</section>
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<script src="js/framework.js"></script>

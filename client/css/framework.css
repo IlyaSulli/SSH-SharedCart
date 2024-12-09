@@ -1,7 +1,7 @@
 :root{
     --background: #ECF4FE;
     --primary: #140a35;
-    --primaryhover: #140a35;
+    --primaryhover: #301881;
     --error: #AF0F0F;
     --await: #FFD700;
     --errorhover: #8C0D0D;
@@ -51,56 +51,58 @@
 body{
     background-color: var(--background);
     transition: background-color 0.3s ease;
+    overflow-x: hidden;
 }
 
 h1{
     color: var(--defaultdarktextcolor);
-    font-family: var(--fontGeneric),Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, sans-serif;
     font-weight: 600;
     font-size: 32px;
 }
 
 h2{
     color: var(--defaultdarktextcolor);
-    font-family: var(--fontGeneric),Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, sans-serif;
     font-weight: 600;
     font-size: 24px;
 }
 
 h3{
     color: var(--defaultdarktextcolor);
-    font-family: var(--fontGeneric),Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, sans-serif;
     font-weight: bold;
     font-size: 20px;
 }
 
 h4{
     color: var(--defaultdarktextcolor);
-    font-family: var(--fontGeneric),Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, sans-serif;
     font-weight: bold;
     font-size: 16px;
 }
 
 p{
     color: var(--defaultdarktextcolor);
-    font-family: var(--fontGeneric),Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, sans-serif;
     font-weight: normal;
     font-size: 12px;
 }
 
 span{
-    font-family: var(--fontGeneric),Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, sans-serif;
+    color: var(--defaultdarktextcolor);
 }
 
 .itemPriceText{
     color: var(--defaultdarktextcolor);
-    font-family: var(--fontGeneric),Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, sans-serif;
     font-weight: 500;
     font-size: 16px;
 }
 
 .buttonText{
-    font-family: var(--fontGeneric),Tahoma, serif;
+    font-family: var(--fontGeneric),Tahoma, sans-serif;
     font-weight: 500;
     font-size: 14px;
 }
@@ -136,6 +138,15 @@ span{
     border: none;
     transition: background-color 0.3s ease;
     color: var(--defaultdarktextcolor);
+}
+
+.button{
+    padding: 10px 15px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
 }
 
 .navigationButton:hover.layer2container{
@@ -236,7 +247,7 @@ label{
     padding-left: 10px;
     font-size: 14px;
     width: 55px;
-    font-family: var(--fontGeneric), Tahoma, serif;
+    font-family: var(--fontGeneric), Tahoma, sans-serif;
     color: var(--defaultdarktextcolor);
 }
 
@@ -244,4 +255,74 @@ label{
     display: grid;
     margin: 0 20px;
     row-gap: 10px;
+}
+
+/* Notification */
+
+/* Notification Styles */
+.notifications-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Add space between notifications */
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #333;
+    opacity: 0;
+    animation: fadeInUp 0.5s forwards;
+}
+
+.notification-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.notification-content {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--fontGeneric),Tahoma, sans-serif;
+}
+
+.notification.info {
+    background-color: #2196F3;
+}
+
+.notification.warning {
+    background-color: #FF9800;
+}
+
+.notification.error {
+    background-color: #F44336;
+}
+
+.notification.success {
+    background-color: #4CAF50;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.notification-container, .notification {
+    box-sizing: border-box;
 }

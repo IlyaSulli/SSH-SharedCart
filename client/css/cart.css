@@ -2,6 +2,12 @@
 
 #backToShoppingButton{
     display: flex;
+    font-style: none;
+}
+
+#backtoshoplink{
+    cursor: pointer;
+    text-decoration: none;
 }
 
 /* Hero */
@@ -46,6 +52,7 @@
 .personalCart{
     align-self: center;
     justify-content: center;
+    min-width: 300px;
     width: 800px;
     max-width: 1200px;
 }
@@ -213,23 +220,24 @@
     font-weight: bold;
 }
 
-/* Checkout */
-
 #checkout{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
     margin-bottom: 20dvh;
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px;
 }
 
 #checkoutDivider{
-    width: 800px;
+    width: 100%;
     max-width: 1200px;
 }
 
 #checkoutWrapper{
-    width: 800px;
+    width: 100%;
     max-width: 1200px;
     display: flex;
     flex-direction: column;
@@ -240,10 +248,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 
 #checkoutSide{
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     margin: 30px;
@@ -261,4 +271,75 @@
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 5px;
+}
+
+/* Error Cart */
+
+.infoCart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5dvh;
+    margin-bottom: 5dvh;
+    width: 800px;
+    max-width: 1200px;
+    align-self: center;
+}
+
+.infoCartSummary{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 20px;
+    min-width: 300px;
+}
+
+#errorImage{
+    width: 300px;
+    object-fit: fill;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+}
+
+.infoCartButton{
+    display: flex;
+    margin-top: 20px;
+    max-width: 200px;
+    width: 200px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--defaultlighttextcolor);
+    border-radius: 5px;
+    background-color: var(--primary);
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.infoCartButton:hover{
+    background-color: var(--primaryhover);
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1200px) {
+    .personalCart, #checkout, #checkoutWrapper {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 992px) {
+    .personalCart, #checkout, #checkoutWrapper {
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .personalCart, #checkout, #checkoutWrapper {
+        max-width: 600px;
+    }
 }
