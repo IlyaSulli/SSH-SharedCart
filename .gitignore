@@ -2,4 +2,4 @@ config.env
 .prettierrc
 node_modules/
 package-lock.json
-.txt
+*.txt

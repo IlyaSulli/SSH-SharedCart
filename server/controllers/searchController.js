@@ -73,7 +73,7 @@ exports.addToCart = async (req, res) => {
             },
          });
       } else {
-         const newQuant = exist[0].Quantity + req.body.Quantity;
+         const newQuant = exist[0].Quantity * 1 + req.body.Quantity * 1;
          const updateCart = await PersonItem.findByIdAndUpdate(
             exist[0].id,
             { Quantity: newQuant },
