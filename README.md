@@ -27,3 +27,4 @@ In some student houses, students use grocery delivery services to have groceries
 - **05/12/2024**: Refactored the backend for the cart page as well as implemented APIs
 - **06/12/2024**: Merged the server and the website and began tests on the cart to ensure it worked
 - **09/12/2024**: Made it so the server side of the program could be run in Docker with the contianer stored on the GitHub Repo
+- **09/12/2024**: A meeting was commenced to fix bugs and to talk about the reflections with what we did.
