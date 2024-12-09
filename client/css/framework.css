@@ -1,8 +1,9 @@
 :root{
     --background: #ECF4FE;
-    --primary: #0D78CF;
-    --primaryhover: #095a9c;
+    --primary: #140a35;
+    --primaryhover: #140a35;
     --error: #AF0F0F;
+    --await: #FFD700;
     --errorhover: #8C0D0D;
     --notify: #DA0000;
     --selection: #ECF4FE;
@@ -23,8 +24,8 @@
 
 [data-theme="dark"] {
     --background: #1A1A1A;
-    --primary: #4A90E2;
-    --primaryhover: #367ABD;
+    --primary: #b480fb;
+    --primaryhover: #8f65c7;
     --error: #FF5A5A;
     --errorhover: #CC4A4A;
     --notify: #FF4444;
@@ -50,6 +51,13 @@
 body{
     background-color: var(--background);
     transition: background-color 0.3s ease;
+}
+
+h1{
+    color: var(--defaultdarktextcolor);
+    font-family: var(--fontGeneric),Tahoma, serif;
+    font-weight: 600;
+    font-size: 32px;
 }
 
 h2{

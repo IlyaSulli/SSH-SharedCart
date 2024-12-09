@@ -38,16 +38,31 @@ function renderCart(
   // Handle the confirm button
   const confirmButton = summaryDiv.getElementsByClassName("cartConfirmButton")[0];
   confirmButton.addEventListener("click", async () => {
+    console.log(`Confirming cart for user ${userId}`);
+    const originalText = confirmButton.innerText;
+    const originalBackgroundColor = confirmButton.style.backgroundColor;
+    const originalColor = confirmButton.style.color;
     const isConfirmed = await getAPIRequest("confirmCart", `userId=${userId}`);
-
     if (isConfirmed) {
       console.log(`Confirmed cart for user ${userId}`);
       confirmButton.classList.add("confirmed");
       confirmButton.innerText = "Unconfirm";
-    } else {
+    } else if (isConfirmed === false) {
       console.log(`Unconfirmed cart for user ${userId}`);
       confirmButton.classList.remove("confirmed");
       confirmButton.innerText = "Confirm";
+    } else {
+      console.error(`Failed to confirm cart for user ${userId}`);
+      confirmButton.innerText = "Failed to Confirm";
+      confirmButton.style.backgroundColor = "#AF0F0F";
+      confirmButton.style.color = "#FFFFFF";
+      confirmButton.disabled = true;
+      setTimeout(() => {
+        confirmButton.innerText = originalText;
+        confirmButton.style.backgroundColor = originalBackgroundColor;
+        confirmButton.style.color = originalColor;
+        confirmButton.disabled = false;
+      }, 2000);
     }
   });
 
@@ -104,12 +119,13 @@ function renderCart(
     // Handle item Removal
     const removeButton = itemDiv.querySelector(".removeButton");
     removeButton.addEventListener("click", async (event) => {
+      console.log(`Removing item ${item._id}`);
       const isRemoved = await getAPIRequest("removeItem", `userId=${userId}&itemId=${item._id}`);
-
       if (isRemoved) {
         console.log(`Removed item ${item._id}`);
         itemDiv.remove();
       } else {
+        removeButton.textContent = "Failed to Remove";
         console.error(`Failed to remove item ${item._id}`);
       }
     });
@@ -197,6 +213,11 @@ function modifySelectedCart(userId) {
 
   confirmButton.disabled = false;
   confirmButton.classList.add("currentUserConfirmButton");
+  if (confirmButton.classList.contains("confirmed")) {
+    confirmButton.innerText = "Unconfirm Order";
+  } else {
+    confirmButton.innerText = "Confirm Order";
+  }
 
   for (let j = 0; j < dropdownItems.length; j++) {
     const item = dropdownItems[j];
@@ -244,6 +265,7 @@ function calculatePersonalCartSubtotal(cart) {
 async function getAPIRequest(endpoint, data) {
   try {
     const response = await axios.get(`http://localhost:5500/${endpoint}/?${data}`);
+    console.log(`Successfully sent data for API ${endpoint}:`, response.data.data);
     return response.data.data;
   } catch (error) {
     if (error.response) {

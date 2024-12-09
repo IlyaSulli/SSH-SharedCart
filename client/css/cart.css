@@ -92,6 +92,28 @@
     border: none;
 }
 
+.cartConfirmButton:disabled{
+    border: 2px solid var(--primary);
+    background-color: unset;
+    color: var(--defaultdarktextcolor);
+}
+
+.cartConfirmButton.confirmed:disabled{
+    background-color: var(--primary);
+    color: var(--defaultlighttextcolor);
+    opacity: 0.5;
+}
+
+.cartConfirmButton.confirmed:disabled:hover{
+    background-color: var(--primary);
+}
+
+.cartConfirmButton:disabled:hover{
+    background-color: unset;
+}
+
+
+
 .cartConfirmButton:hover{
     background-color: var(--primaryhover);
 }
@@ -134,9 +156,15 @@
     transition: background-color 0.3s ease;
 }
 
+.removeButton:disabled{
+    opacity: 0;
+}
+
 .removeButton:hover{
     background-color: var(--errorhover);
 }
+
+
 
 .removeButton:active{
     border: 1px solid var(--error);

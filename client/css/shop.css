@@ -1,5 +1,16 @@
 header {
-	justify-content: right;
+	justify-content: space-between;
+	margin-bottom: 40px;
+}
+
+#leftHeader{
+	display: flex;
+	align-items: center;
+}
+
+#rightHeader{
+	display: flex;
+	align-items: center;
 }
 
 svg {
@@ -28,6 +39,16 @@ svg {
 	border-radius: 50%;
 	background: var(--error);
 	color: var(--defaultlighttextcolor);
+}
+
+#logo{
+	display: flex;
+	align-items: center;
+	width:50px;
+	height:50px;
+	border-radius: 5px;
+	margin-left: 20px;
+	padding-right: 30px;
 }
 
 .searchBarHero {

@@ -171,6 +171,7 @@ const renderShopPage = async () => {
 							name="quantity"
 							min="1"
 							max="99"
+							value="1"
 					/></label>
 					<input
 						type="submit"
