@@ -7,9 +7,9 @@ const APIFeatures = require('./../APIFeatures');
 exports.getInfo = async (req, res) => {
    try {
       const people = await Person.find();
-
-      for (const person of people) {
-         let id = person._id.toString();
+      for (var i = 0; i < people.length; i++) {
+         console.log(i, people[i]);
+         let id = people[i]._id.toString();
          let items = await PersonItem.find({
             PersonId: id,
          });
@@ -24,12 +24,18 @@ exports.getInfo = async (req, res) => {
             const updatedItem = {
                ...itemObj.toObject(),
                _id: itemid,
-               Quantity: quantityItem,
+               Quantity: quantityItem.Quantity,
             };
             cart.push(updatedItem);
          }
+         //console.log(cart.length, people[i]);
+         if (cart.length > 0) {
          let jsonString = JSON.stringify(cart, null, 0);
-         person.Cart = jsonString;
+         people[i].Cart = jsonString;
+         } else {
+            people.splice(i, 1);
+            i--;
+         }
       }
 
       res.status(200).json({
