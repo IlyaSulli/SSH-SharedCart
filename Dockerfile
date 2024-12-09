@@ -1,5 +1,5 @@
 FROM node:22.11.0
-WORKDIR /server
+WORKDIR /usr/src/sharedcart
 COPY . .
 RUN npm --verbose install
 EXPOSE 5500
