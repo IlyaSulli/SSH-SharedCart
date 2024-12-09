@@ -1,5 +1,5 @@
 const express = require('express');
-const cartController = require('./../controllers/cartController');
+const cartController = require(`${__dirname}/../controllers/cartController`);
 
 const router = express.Router();
 
