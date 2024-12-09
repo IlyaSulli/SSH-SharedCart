@@ -4,6 +4,7 @@ const { error } = require('console');
 const cors = require('cors');
 
 const searchRouter = require('./routes/searchRoutes');
+console.log('here');
 const cartRouter = require('./routes/cartRoutes');
 
 const app = express();
