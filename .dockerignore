@@ -1,0 +1,5 @@
+node-modules/
+.github
+.txt
+.dockerignore
+.prettierc
