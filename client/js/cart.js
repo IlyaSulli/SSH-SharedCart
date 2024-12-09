@@ -42,7 +42,7 @@ function renderCart(
     const originalText = confirmButton.innerText;
     const originalBackgroundColor = confirmButton.style.backgroundColor;
     const originalColor = confirmButton.style.color;
-    const isConfirmed = await getAPIRequest("confirmCart", `userId=${userId}`);
+    const isConfirmed = await getAPIRequest("updateStatus", `userId=${userId}`);
     if (isConfirmed) {
       console.log(`Confirmed cart for user ${userId}`);
       confirmButton.classList.add("confirmed");
@@ -96,7 +96,7 @@ function renderCart(
               </div>
               <span class="itemPrice itemPriceText">£${item.ItemCost.toFixed(2)}</span>
               <label>Quantity: <input type="number" class="itemQuantity layer3container" name="quantity" min="1" max="99" value="${
-                item.Quantity.Quantity
+                item.Quantity
               }" disabled data-itemid="${item._id}"></label>
               <input type="submit" class="removeButton buttonText layer3container" value="Remove" disabled data-itemid="${item._id}">
             `;
@@ -120,7 +120,7 @@ function renderCart(
     const removeButton = itemDiv.querySelector(".removeButton");
     removeButton.addEventListener("click", async (event) => {
       console.log(`Removing item ${item._id}`);
-      const isRemoved = await getAPIRequest("removeItem", `userId=${userId}&itemId=${item._id}`);
+      const isRemoved = await getAPIRequest("deleteItem", `userId=${userId}&itemId=${item._id}`);
       if (isRemoved) {
         console.log(`Removed item ${item._id}`);
         itemDiv.remove();
@@ -255,17 +255,10 @@ function renderCheckout(subtotal, deliveryFee) {
 }
 
 function calculatePersonalCartSubtotal(cart) {
-  if (!Array.isArray(cart)) {
-    console.error("Invalid cart data");
-    return 0.0;
-  }
   let total = 0.0;
+  console.log(cart);
   cart.forEach((item) => {
-    if (item && item.ItemCost && item.Quantity && item.Quantity.Quantity) {
-      total += item.ItemCost * item.Quantity.Quantity;
-    } else {
-      console.error("Invalid item in cart", item);
-    }
+      total += item.ItemCost * item.Quantity;
   });
   return total;
 }
