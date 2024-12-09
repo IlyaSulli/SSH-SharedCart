@@ -9,16 +9,16 @@ router
    .route('/updateQuantity')
    .get(cartController.updateQuantity);
 
-router.route('/deleteItem/:personid/:itemid').get(cartController.deleteItem);
+router.route('/deleteItem/').get(cartController.deleteItem);
 
-router.route('/updateStatus/:personid').get(cartController.updateStatus);
+router.route('/updateStatus/').get(cartController.updateStatus);
 
-router.route('/getShops').get(cartController.getShops);
+router.route('/getShops/').get(cartController.getShops);
 
-router.route('/getSelectedShop').get(cartController.getSelectedShop);
+router.route('/getSelectedShop/').get(cartController.getSelectedShop);
 
-router.route('/getUsers').get(cartController.getUsers);
+router.route('/getUsers/').get(cartController.getUsers);
 
-router.route('/getCartCount/:personid').get(cartController.getCartCount);
+router.route('/getCartCount/').get(cartController.getCartCount);
 
 module.exports = router;
