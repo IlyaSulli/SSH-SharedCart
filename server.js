@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const app = require(`./server/app`);
+const app = require(`${__dirname}/server/app`);
 
-dotenv.config({ path: `${__dirname}/server/config.env` });
+dotenv.config({ path: `${__dirname}/server/config/config.env` });
 
 if (typeof process.env.MONGODB_URI !== "undefined") {
   const DB = process.env.MONGODB_URI.replace(
