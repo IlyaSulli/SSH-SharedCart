@@ -232,15 +232,16 @@ const search = async () => {
 	// Setting maxPage
 	await axios
 		.get(
-			`http://localhost:5500/search/${searchTerms}/?searchTerm=${localStorage.getItem(
+			`http://localhost:5500/search/${localStorage.getItem(
 				"shopId"
-			)}`
+			)}/?searchTerm=${searchTerms}`
 		)
 		.then((res) => {
 			showNotification(
 				"success",
 				"Successfully searched for items: " + searchTerms
 			);
+
 			maxPage = Math.ceil(res.data.results / 5);
 		})
 		.catch(function (error) {
