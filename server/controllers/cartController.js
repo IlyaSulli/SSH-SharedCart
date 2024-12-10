@@ -127,6 +127,23 @@ exports.updateStatus = async (req, res) => {
          };
          person = await Person.updateOne(personQuery, updateDocument);
       }
+      const people = await Person.find();
+      var confirmedPeople = [];
+      var allPeople = [];
+      for (onePerson of people) {
+         console.log(onePerson);
+         if (PersonItem.find({PersonId: onePerson._id.toString()}).length != 0) {
+            allPeople.push(onePerson._id);
+            const length = await Person.find({_id: onePerson._id, Confirmed: true}).length;
+            if (length != 0) {
+               confirmedPeople.push(onePerson);
+            }
+         }
+      }
+      if (confirmedPeople.length == allPeople.length) {
+         console.log("Hello");
+         await Person.updateMany({}, {$set: {Confirmed: false}});
+      }
       res.status(200).json({
          status: 'success',
          requestedAt: req.requestTime,
