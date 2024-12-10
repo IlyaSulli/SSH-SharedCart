@@ -12,8 +12,7 @@ const throwError = () => {
 // Open and close dropdown on clicking the logo
 document.getElementById("shopLogoBackground").addEventListener("click", () => {
 	if (!selectedShop) {
-		document.querySelector(".shopDropdown").classList.toggle("open");
-		document.querySelector(".searchBarHero").classList.toggle("open");
+		getSelectedShop();
 	}
 });
 
@@ -23,7 +22,14 @@ const getSelectedShop = async () => {
 		.then((res) => {
 			if (res.data.data) {
 				selectedShop = res.data.data.shop;
-				if (selectedShop) {
+				if (!selectedShop) {
+					document
+						.querySelector(".shopDropdown")
+						.classList.toggle("open");
+					document
+						.querySelector(".searchBarHero")
+						.classList.toggle("open");
+				} else {
 					document.getElementById("shopLogoBackground").classList =
 						selectedShop.shopName.toLowerCase();
 					localStorage.setItem("shopId", selectedShop._id);
