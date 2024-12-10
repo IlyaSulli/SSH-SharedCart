@@ -1,10 +1,12 @@
 const Item = require(`${__dirname}/../models/itemModel`);
 const Shop = require(`${__dirname}/../models/shopModel`);
 const PersonItem = require(`${__dirname}/../models/peopleItemModel`);
+const API = require(`${__dirname}/../models/apiModel`);
 const APIFeatures = require(`${__dirname}/../APIFeatures`);
 
 exports.getShops = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/search" + req.url, APITimeRequest: req.requestTime});
       const shops = await Shop.find();
 
       res.status(200).json({
@@ -26,6 +28,7 @@ exports.getShops = async (req, res) => {
 
 exports.getShopItems = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/search" + req.url, APITimeRequest: req.requestTime});
       if (!req.query.searchTerm) {
          req.query.searchTerm = '';
       } else {
@@ -60,6 +63,7 @@ exports.getShopItems = async (req, res) => {
 
 exports.addToCart = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/search" + req.url, APITimeRequest: req.requestTime});
       const exist = await PersonItem.find({
          PersonId: req.body.PersonId,
          ItemId: req.body.ItemId,
@@ -100,6 +104,7 @@ exports.addToCart = async (req, res) => {
 
 exports.getItem = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/search" + req.url, APITimeRequest: req.requestTime});
       const item = await Item.findById(req.params.id);
       res.status(200).json({
          status: 'success',
