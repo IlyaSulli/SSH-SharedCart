@@ -213,6 +213,9 @@ function renderEmptyCart() {
 function modifySelectedCart(userId) {
   const personalCartsDiv = document.getElementById("personalCarts");
   const personalCarts = document.getElementById(userId);
+  if (!personalCarts) {
+    return;
+  }
 
   // Move the selected cart to the top of the list
   if (personalCartsDiv.firstChild !== personalCarts) {
@@ -334,11 +337,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     const deliveryFeeSplit = (shop.shop.DeliveryPrice / carts.people.length).toFixed(2);
     let cartsSubtotal = 0;
     // For each user with items in the cart, render their personal cart
-    carts.people.forEach((cart) => {
+    carts.people.forEach(async (cart) => {
       let subtotal = calculatePersonalCartSubtotal(JSON.parse(cart.Cart));
       cartsSubtotal += subtotal;
       
-      renderCart(
+      await renderCart(
         cart._id,
         cart.FirstName,
         cart.Surname,
