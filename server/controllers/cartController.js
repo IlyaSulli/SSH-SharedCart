@@ -2,10 +2,12 @@ const Item = require(`${__dirname}/../models/itemModel`);
 const Shop = require(`${__dirname}/../models/shopModel`);
 const Person = require(`${__dirname}/../models/peopleModel`);
 const PersonItem = require(`${__dirname}/../models/peopleItemModel`);
+const API = require(`${__dirname}/../models/apiModel`);
 const APIFeatures = require(`${__dirname}/../APIFeatures`);
 
 exports.getInfo = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/getCart" + req.url, APITimeRequest: req.requestTime});
       const people = await Person.find();
       for (var i = 0; i < people.length; i++) {
          let id = people[i]._id.toString();
@@ -54,6 +56,7 @@ exports.getInfo = async (req, res) => {
 
 exports.updateQuantity = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/getCart" + req.url, APITimeRequest: req.requestTime});
       const itemQuery = PersonItem.find({
          ItemId: req.query.itemId,
          PersonId: req.query.userId,
@@ -85,6 +88,7 @@ exports.updateQuantity = async (req, res) => {
 
 exports.deleteItem = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/getCart" + req.url, APITimeRequest: req.requestTime});
       const itemQuery = PersonItem.findOne({
          PersonId: req.query.userId,
          ItemId: req.query.itemId,
@@ -110,6 +114,7 @@ exports.deleteItem = async (req, res) => {
 
 exports.updateStatus = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/getCart" + req.url, APITimeRequest: req.requestTime});
       var personQuery = await Person.findById(req.query.userId);
       var person;
       if (personQuery.Confirmed == true) {
@@ -126,6 +131,23 @@ exports.updateStatus = async (req, res) => {
             },
          };
          person = await Person.updateOne(personQuery, updateDocument);
+      }
+      const people = await Person.find();
+      var confirmedPeople = [];
+      var allPeople = [];
+      for (const onePerson of people) {
+         const currentLength = await PersonItem.countDocuments({PersonId: onePerson._id});
+         if (currentLength != 0) {
+            allPeople.push(onePerson._id);
+            const length = await Person.countDocuments({_id: onePerson._id, Confirmed: true});
+            if (length != 0) {
+               confirmedPeople.push(onePerson);
+            }
+         }
+      }
+      if (confirmedPeople.length == allPeople.length && confirmedPeople.length != 0) {
+         await Person.updateMany({}, {$set: {Confirmed: false}});
+         await PersonItem.deleteMany();
       }
       res.status(200).json({
          status: 'success',
@@ -145,6 +167,7 @@ exports.updateStatus = async (req, res) => {
 
 exports.getShops = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/getCart" + req.url, APITimeRequest: req.requestTime});
       const shops = await Shop.find();
       res.status(200).json({
          status: 'success',
@@ -164,6 +187,7 @@ exports.getShops = async (req, res) => {
 
 exports.getSelectedShop = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/getCart" + req.url, APITimeRequest: req.requestTime});
       const items = await PersonItem.find();
       if (items.length != 0) {
          const itemId = items[0].ItemId;
@@ -174,6 +198,13 @@ exports.getSelectedShop = async (req, res) => {
             requestedAt: req.requestTime,
             data: {
                shop,
+            },
+         });
+      } else {
+         res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            data: {
             },
          });
       }
@@ -188,6 +219,7 @@ exports.getSelectedShop = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/getCart" + req.url, APITimeRequest: req.requestTime});
       const people = await Person.find();
       res.status(200).json({
          status: 'success',
@@ -207,6 +239,7 @@ exports.getUsers = async (req, res) => {
 
 exports.getCartCount = async (req, res) => {
    try {
+      const apiCall = await API.create({APIRequest: "/getCart" + req.url, APITimeRequest: req.requestTime});
       const personitems = await PersonItem.find({
          PersonId: req.query.userId,
       });

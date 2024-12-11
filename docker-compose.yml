@@ -1,5 +1,0 @@
-services:
-  server:
-    image: server
-    ports:
-      - 5500:5500

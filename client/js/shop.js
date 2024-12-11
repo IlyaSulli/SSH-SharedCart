@@ -3,11 +3,22 @@ let itemsArray = [];
 let searchTerms = "";
 let currentPage,
 	maxPage = 1;
+let selectedShop;
+
+const throwError = () => {
+	document.querySelector(".error404").style.display = "block";
+};
 
 // Open and close dropdown on clicking the logo
-document.getElementById("shopLogoBackground").addEventListener("click", () => {
-	document.querySelector(".shopDropdown").classList.toggle("open");
-	document.querySelector(".searchBarHero").classList.toggle("open");
+document.getElementById("shopLogoBackground").addEventListener("click", async () => {
+	let shop;
+	await axios.get(`http://localhost:5500/getCart/getSelectedShop`).then((res) => {
+		shop = res.data.data;
+	});
+	if (Object.keys(shop).length === 0) {
+		document.querySelector(".shopDropdown").classList.toggle("open");
+		document.querySelector(".searchBarHero").classList.toggle("open");
+	}
 });
 
 document.getElementById("currentUserButton").addEventListener("click", () => {
@@ -30,30 +41,43 @@ document.addEventListener("click", (e) => {
 });
 
 const getShops = async () => {
+	let shopList;
+	let selectedShop;
 	await axios.get(`http://localhost:5500/search/`).then((res) => {
-		const shopList = res.data.data.shops;
+		shopList = res.data.data.shops;
+	});
+	await axios.get(`http://localhost:5500/getCart/getSelectedShop`).then((res) => {
+		selectedShop = res.data.data;
+	});
 
-		document.querySelector(".initialShop").classList =
-			shopList[0].shopName.toLowerCase();
-		localStorage.setItem("shopId", shopList[0]._id);
+	if (Object.keys(selectedShop).length === 0) {
+		selectedShop = shopList[0];
+	} else{
+		selectedShop = selectedShop.shop;
+	}
+	console.log(selectedShop.shop);
+	document.getElementById("shopLogoBackground").classList =
+		selectedShop.shopName.toLowerCase();
+	localStorage.setItem("shopId", selectedShop._id);
 
-		shopList.forEach((shop) => {
-			let newShopDiv = document.createElement("div");
-			newShopDiv.innerHTML = `<div class="shopOption ${shop.shopName.toLowerCase()}" id="${
-				shop._id
-			}">
-						<div></div>
-					</div>`;
-			document.querySelector(".shopDropdown").appendChild(newShopDiv);
-		});
+	shopList.forEach((shop) => {
+		let newShopDiv = document.createElement("div");
+		newShopDiv.innerHTML = `<div class="shopOption ${shop.shopName.toLowerCase()}" id="${
+			shop._id
+		}">
+					<div></div>
+				</div>`;
+		document.querySelector(".shopDropdown").appendChild(newShopDiv);
 	});
 	// Change the currentShop and logo displayed
 	document.querySelectorAll(".shopOption").forEach((el) => {
 		el.addEventListener("click", (e) => {
 			currentShop = e.target.closest(".shopOption").classList[1];
 			localStorage.setItem("shopId", e.target.closest(".shopOption").id);
+			selectedShop = currentShop;
 			document.getElementById("shopLogoBackground").classList =
 				currentShop;
+			search();
 		});
 	});
 };
@@ -116,7 +140,7 @@ getUsers();
 
 const updateQuantity = async (userId) => {
 	await axios
-		.get(`http://localhost:5500/getCart/getCartCount/${userId}`)
+		.get(`http://localhost:5500/getCart/getCartCount/?${userId}`)
 		.then((res) => {
 			const cartQuantity = res.data.data.cart.length;
 			const quantityEl = document.getElementById("cartCount");
@@ -129,6 +153,7 @@ const updateQuantity = async (userId) => {
 };
 
 const renderShopPage = async () => {
+
 	await axios
 		.get(
 			`http://localhost:5500/search/${localStorage.getItem(
@@ -140,7 +165,7 @@ const renderShopPage = async () => {
 			document.querySelector(".itemList").innerHTML = "";
 			itemsArray.forEach((item) => {
 				const itemId = item._id;
-				const name = item.ItemName;
+				const itemName = item.ItemName;
 				const price = item.ItemCost;
 				const imageSrc = item.ImageLink;
 				const description = item.ItemDescription;
@@ -150,11 +175,11 @@ const renderShopPage = async () => {
 		<div class="itemContainer layer2container" id="${itemId}">
 				<div class="itemAdvertisement">
 					<div class="itemImageContainer layer3container">
-						<div class="itemImage"><img src="${imageSrc}" alt="Picture of ${name}"></div>
+						<div class="itemImage"><img src="${imageSrc}" alt="Picture of ${itemName}"></div>
 					</div>
 					<div class="itemMeta">
 						<h4 class="itemName">
-							${name}
+							${itemName}
 						</h4>
 						<p class="itemDescription">
 							${description}
@@ -162,7 +187,7 @@ const renderShopPage = async () => {
 					</div>
 				</div>
 				<div class="itemPurchasing">
-					<span class="itemPrice itemPriceText">£${price}</span>
+					<span class="itemPrice itemPriceText">£${price.toFixed(2)}</span>
 					<label
 						>Quantity:
 						<input
@@ -188,11 +213,14 @@ const renderShopPage = async () => {
 					quantity = item.querySelector(".itemQuantity").value
 						? item.querySelector(".itemQuantity").value
 						: 1;
+					showNotification("info", `Adding ${quantity}x items to cart...`);
 					addToCart(item.id, quantity);
+
 				});
 			});
 		})
 		.catch(function (error) {
+			throwError();
 			console.error(error);
 		});
 };
@@ -206,16 +234,21 @@ const search = async () => {
 	// Setting maxPage
 	await axios
 		.get(
-			`http://localhost:5500/search/${searchTerms}/?searchTerm=${localStorage.getItem(
+			`http://localhost:5500/search/${localStorage.getItem(
 				"shopId"
-			)}`
+			)}/?searchTerm=${searchTerms}`
 		)
 		.then((res) => {
-			showNotification("success", "Successfully searched for items: "+ searchTerms);
+			showNotification(
+				"success",
+				"Successfully searched for items: " + searchTerms
+			);
+
 			maxPage = Math.ceil(res.data.results / 5);
 		})
 		.catch(function (error) {
 			showNotification("error", "Failed to search for items");
+			throwError();
 			console.error(error);
 		});
 
@@ -255,10 +288,12 @@ const addToCart = async (itemId, quantity) => {
 			Quantity: quantity,
 		})
 		.then((res) => {
+			showNotification("success", "Successfully added item to cart");
 			console.log(res);
 		})
 		.catch(function (error) {
-			// handle error
+			showNotification("error", "Failed to add item to cart");
+			throwError();
 			console.error(error);
 		});
 	updateQuantity(userId);
