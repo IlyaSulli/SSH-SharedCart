@@ -2,7 +2,7 @@ const API = require(`${__dirname}/../models/apiModel`);
 
 exports.getInfo = async (req, res) => {
     try {
-        const apiCalls = API.find();
+        const apiCalls = await API.find();
         res.status(200).json({
             status: 'success',
             requestedAt: req.requestTime,
